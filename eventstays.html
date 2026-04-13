@@ -1,0 +1,875 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>EventStays — Luxury Accommodation Near UK Event Venues</title>
+<meta name="description" content="Handpicked luxury private residences steps from UK stadiums, arenas and conference venues. Curated for athletes, executives and discerning event travellers." />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --gold: #C9A84C;
+    --gold-light: #E8D09A;
+    --gold-pale: #F7F0DE;
+    --ink: #1A1714;
+    --ink-mid: #3D3830;
+    --muted: #7A7267;
+    --surface: #FAFAF8;
+    --surface-alt: #F2EFE8;
+    --border: rgba(201,168,76,0.2);
+    --border-hard: rgba(201,168,76,0.45);
+    --font-display: 'Cormorant Garamond', Georgia, serif;
+    --font-body: 'DM Sans', sans-serif;
+  }
+
+  html { scroll-behavior: smooth; }
+  body { font-family: var(--font-body); background: var(--surface); color: var(--ink); line-height: 1.6; font-size: 15px; -webkit-font-smoothing: antialiased; }
+
+  /* ── SCROLLBAR ── */
+  ::-webkit-scrollbar { width: 4px; }
+  ::-webkit-scrollbar-track { background: transparent; }
+  ::-webkit-scrollbar-thumb { background: var(--border-hard); }
+
+  /* ── NAV ── */
+  .nav {
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 18px 60px; border-bottom: 0.5px solid var(--border-hard);
+    background: var(--surface); position: sticky; top: 0; z-index: 200;
+  }
+  .nav-logo { font-family: var(--font-display); font-size: 22px; font-weight: 600; letter-spacing: 0.04em; color: var(--ink); text-decoration: none; }
+  .nav-logo span { color: var(--gold); }
+  .nav-links { display: flex; gap: 32px; list-style: none; }
+  .nav-links a { font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted); text-decoration: none; transition: color 0.2s; }
+  .nav-links a:hover { color: var(--gold); }
+  .nav-cta {
+    background: var(--ink); color: #fff; font-family: var(--font-body);
+    font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase;
+    padding: 11px 24px; border: none; cursor: pointer; transition: background 0.2s;
+    text-decoration: none; display: inline-block;
+  }
+  .nav-cta:hover { background: var(--gold); color: var(--ink); }
+  .nav-hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; background: none; border: none; padding: 4px; }
+  .nav-hamburger span { display: block; width: 22px; height: 1px; background: var(--ink); transition: all 0.3s; }
+
+  /* ── HERO ── */
+  .hero {
+    position: relative; min-height: 92vh; display: flex; align-items: flex-end;
+    overflow: hidden; background: var(--ink);
+  }
+  .hero-bg {
+    position: absolute; inset: 0;
+    background: linear-gradient(160deg, #2A2318 0%, #1A1714 40%, #0D0B08 100%);
+  }
+  .hero-texture {
+    position: absolute; inset: 0; opacity: 0.05;
+    background-image:
+      repeating-linear-gradient(0deg, transparent, transparent 50px, rgba(201,168,76,0.4) 50px, rgba(201,168,76,0.4) 51px),
+      repeating-linear-gradient(90deg, transparent, transparent 50px, rgba(201,168,76,0.4) 50px, rgba(201,168,76,0.4) 51px);
+  }
+  .hero-ornament {
+    position: absolute; top: 70px; right: 80px;
+    width: 320px; height: 320px;
+    border: 0.5px solid rgba(201,168,76,0.12); border-radius: 50%;
+  }
+  .hero-ornament::after {
+    content: ''; position: absolute; inset: 30px;
+    border: 0.5px solid rgba(201,168,76,0.07); border-radius: 50%;
+  }
+  .hero-tag { position: absolute; top: 48px; left: 60px; display: flex; align-items: center; gap: 12px; }
+  .hero-tag-line { width: 32px; height: 0.5px; background: var(--gold); }
+  .hero-tag-text { font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--gold); }
+  .hero-content { position: relative; z-index: 2; padding: 0 60px 100px; max-width: 820px; }
+  .hero-eyebrow {
+    font-size: 10px; letter-spacing: 0.22em; text-transform: uppercase; color: var(--gold);
+    margin-bottom: 22px; display: flex; align-items: center; gap: 14px;
+  }
+  .hero-eyebrow::before { content: ''; display: inline-block; width: 24px; height: 0.5px; background: var(--gold); }
+  .hero-h1 {
+    font-family: var(--font-display); font-size: clamp(56px, 7.5vw, 104px);
+    font-weight: 300; line-height: 1.0; color: #fff; margin-bottom: 8px;
+  }
+  .hero-h1 em { font-style: italic; color: var(--gold-light); }
+  .hero-subtitle {
+    font-size: 15px; color: rgba(255,255,255,0.5); max-width: 480px;
+    margin: 28px 0 44px; line-height: 1.75; font-weight: 300;
+  }
+  .hero-actions { display: flex; gap: 16px; flex-wrap: wrap; align-items: center; }
+  .btn-primary {
+    background: var(--gold); color: var(--ink); font-family: var(--font-body);
+    font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase;
+    padding: 15px 36px; border: none; cursor: pointer; font-weight: 500;
+    transition: background 0.2s; text-decoration: none; display: inline-block;
+  }
+  .btn-primary:hover { background: var(--gold-light); }
+  .btn-ghost {
+    background: transparent; color: rgba(255,255,255,0.65); font-family: var(--font-body);
+    font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase;
+    padding: 15px 36px; border: 0.5px solid rgba(255,255,255,0.2); cursor: pointer;
+    transition: all 0.2s; text-decoration: none; display: inline-block;
+  }
+  .btn-ghost:hover { border-color: var(--gold); color: var(--gold); }
+  .hero-stats {
+    position: absolute; right: 60px; bottom: 100px; z-index: 2;
+    display: flex; flex-direction: column; gap: 28px; text-align: right;
+  }
+  .hero-stat-num { font-family: var(--font-display); font-size: 42px; font-weight: 300; color: var(--gold); line-height: 1; }
+  .hero-stat-label { font-size: 9px; letter-spacing: 0.18em; text-transform: uppercase; color: rgba(255,255,255,0.35); margin-top: 4px; }
+
+  /* ── SECTIONS ── */
+  .section { padding: 110px 60px; }
+  .section-alt { background: var(--surface-alt); }
+  .section-dark { background: var(--ink); color: #fff; }
+  .section-label {
+    font-size: 9px; letter-spacing: 0.24em; text-transform: uppercase;
+    color: var(--gold); margin-bottom: 18px; display: flex; align-items: center; gap: 14px;
+  }
+  .section-label::before { content: ''; display: inline-block; width: 20px; height: 0.5px; background: var(--gold); }
+  .section-h2 { font-family: var(--font-display); font-size: clamp(38px, 4.5vw, 62px); font-weight: 300; line-height: 1.1; }
+  .section-h2 em { font-style: italic; color: var(--gold); }
+  .section-h2-light { color: #fff; }
+  .section-intro { font-size: 15px; color: var(--muted); max-width: 580px; margin-top: 16px; line-height: 1.8; font-weight: 300; }
+  .section-intro-light { color: rgba(255,255,255,0.45); }
+
+  /* ── SEARCH BAR ── */
+  .search-wrap { margin-top: 52px; }
+  .search-bar {
+    display: flex; max-width: 820px;
+    border: 0.5px solid var(--border-hard);
+  }
+  .search-field {
+    flex: 1; display: flex; flex-direction: column;
+    padding: 18px 22px; border-right: 0.5px solid var(--border-hard);
+    background: #fff;
+  }
+  .search-field:last-of-type { border-right: none; flex: 0 0 auto; }
+  .search-field label { font-size: 8px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--gold); margin-bottom: 5px; }
+  .search-field select,
+  .search-field input {
+    border: none; outline: none; font-family: var(--font-body);
+    font-size: 13px; color: var(--ink); background: transparent; padding: 0; width: 100%;
+  }
+  .search-submit {
+    background: var(--ink); color: #fff; border: none;
+    padding: 0 32px; font-family: var(--font-body);
+    font-size: 10px; letter-spacing: 0.16em; text-transform: uppercase;
+    cursor: pointer; white-space: nowrap; transition: background 0.2s; min-width: 130px;
+  }
+  .search-submit:hover { background: var(--gold); color: var(--ink); }
+
+  /* ── DIVIDER ── */
+  .divider { display: flex; align-items: center; gap: 20px; padding: 0 60px; }
+  .divider-line { flex: 1; height: 0.5px; background: var(--border-hard); }
+  .divider-ornament { font-family: var(--font-display); font-size: 18px; color: var(--gold); }
+
+  /* ── TRIBES ── */
+  .tribes-grid {
+    display: grid; grid-template-columns: repeat(4, 1fr);
+    gap: 1px; margin-top: 64px; background: var(--border-hard);
+    border: 0.5px solid var(--border-hard);
+  }
+  .tribe-card {
+    background: var(--surface); padding: 40px 30px; cursor: pointer;
+    position: relative; overflow: hidden; transition: background 0.25s;
+  }
+  .tribe-card:hover { background: var(--ink); }
+  .tribe-card:hover .tribe-name,
+  .tribe-card:hover .tribe-role { color: #fff; }
+  .tribe-card:hover .tribe-keywords li { color: rgba(255,255,255,0.6); }
+  .tribe-card:hover .tribe-icon-bg { background: rgba(201,168,76,0.12); }
+  .tribe-card:hover .tribe-keywords li::before { color: var(--gold); }
+  .tribe-icon-bg {
+    width: 52px; height: 52px; background: var(--gold-pale);
+    display: flex; align-items: center; justify-content: center;
+    margin-bottom: 24px; font-size: 22px; transition: background 0.25s;
+  }
+  .tribe-name { font-family: var(--font-display); font-size: 26px; font-weight: 400; color: var(--ink); margin-bottom: 6px; transition: color 0.25s; }
+  .tribe-role { font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted); margin-bottom: 20px; transition: color 0.25s; }
+  .tribe-keywords { list-style: none; display: flex; flex-direction: column; gap: 8px; }
+  .tribe-keywords li { font-size: 12px; color: var(--muted); transition: color 0.25s; display: flex; align-items: flex-start; gap: 10px; line-height: 1.4; }
+  .tribe-keywords li::before { content: '—'; color: var(--gold); font-size: 10px; flex-shrink: 0; margin-top: 2px; }
+  .tribe-badge {
+    position: absolute; top: 22px; right: 22px;
+    font-size: 8px; letter-spacing: 0.16em; text-transform: uppercase;
+    color: var(--gold); border: 0.5px solid var(--border-hard); padding: 4px 10px;
+  }
+
+  /* ── VENUES ── */
+  .venues-layout { display: grid; grid-template-columns: 1fr 1.1fr; gap: 64px; margin-top: 64px; align-items: start; }
+  .venue-list { border: 0.5px solid var(--border-hard); }
+  .venue-item {
+    padding: 22px 28px; border-bottom: 0.5px solid var(--border);
+    cursor: pointer; transition: background 0.18s;
+    display: flex; align-items: center; justify-content: space-between;
+  }
+  .venue-item:last-child { border-bottom: none; }
+  .venue-item:hover,
+  .venue-item.active { background: var(--ink); }
+  .venue-item:hover .venue-item-name,
+  .venue-item.active .venue-item-name { color: #fff; }
+  .venue-item:hover .venue-item-loc,
+  .venue-item.active .venue-item-loc { color: rgba(255,255,255,0.4); }
+  .venue-item:hover .venue-arrow,
+  .venue-item.active .venue-arrow { color: var(--gold); }
+  .venue-item-name { font-family: var(--font-display); font-size: 21px; font-weight: 400; color: var(--ink); transition: color 0.18s; }
+  .venue-item-loc { font-size: 11px; color: var(--muted); margin-top: 2px; letter-spacing: 0.06em; transition: color 0.18s; }
+  .venue-arrow { color: var(--muted); font-size: 18px; transition: color 0.18s; }
+
+  .venue-detail { background: var(--gold-pale); padding: 44px; border: 0.5px solid var(--border-hard); }
+  .venue-detail-eyebrow { font-size: 9px; letter-spacing: 0.22em; text-transform: uppercase; color: var(--gold); margin-bottom: 12px; }
+  .venue-detail-name { font-family: var(--font-display); font-size: 38px; font-weight: 300; color: var(--ink); line-height: 1.1; margin-bottom: 8px; }
+  .venue-detail-dist { font-size: 13px; color: var(--muted); margin-bottom: 26px; padding-bottom: 26px; border-bottom: 0.5px solid var(--border-hard); line-height: 1.6; }
+  .venue-detail-kw-label,
+  .venue-events-label { font-size: 9px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--muted); margin-bottom: 10px; }
+  .venue-detail-kw { margin-bottom: 22px; }
+  .kw-tags { display: flex; flex-wrap: wrap; gap: 7px; }
+  .kw-tag { font-size: 11px; background: #fff; border: 0.5px solid var(--border-hard); color: var(--ink); padding: 5px 13px; letter-spacing: 0.04em; }
+  .event-pill {
+    display: inline-flex; align-items: center; gap: 8px;
+    background: var(--ink); color: rgba(255,255,255,0.8);
+    font-size: 11px; padding: 7px 14px; margin: 0 6px 7px 0; letter-spacing: 0.04em;
+  }
+  .event-pill-date { color: var(--gold); font-size: 10px; }
+  .venue-events-wrap { margin-bottom: 26px; }
+  .venue-cta {
+    background: var(--ink); color: #fff; border: none;
+    padding: 14px 28px; font-family: var(--font-body);
+    font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase;
+    cursor: pointer; width: 100%; transition: background 0.2s;
+  }
+  .venue-cta:hover { background: var(--gold); color: var(--ink); }
+
+  /* ── EVENTS CALENDAR ── */
+  .calendar-top { display: flex; justify-content: space-between; align-items: flex-end; flex-wrap: wrap; gap: 28px; }
+  .events-grid {
+    display: grid; grid-template-columns: repeat(3, 1fr);
+    gap: 1px; background: rgba(255,255,255,0.08);
+    border: 0.5px solid rgba(255,255,255,0.08); margin-top: 52px;
+  }
+  .event-card { background: #211D18; padding: 32px 28px; position: relative; }
+  .event-card-month { font-size: 9px; letter-spacing: 0.22em; text-transform: uppercase; color: var(--gold); margin-bottom: 8px; }
+  .event-card-bg-date {
+    font-family: var(--font-display); font-size: 72px; font-weight: 300;
+    color: rgba(255,255,255,0.05); line-height: 1; position: absolute;
+    top: 16px; right: 20px; pointer-events: none;
+  }
+  .event-card-name { font-family: var(--font-display); font-size: 24px; font-weight: 300; color: #fff; margin-bottom: 6px; line-height: 1.2; }
+  .event-card-venue { font-size: 11px; color: rgba(255,255,255,0.4); margin-bottom: 18px; letter-spacing: 0.04em; }
+  .event-card-tags { display: flex; gap: 6px; flex-wrap: wrap; }
+  .event-tag { font-size: 9px; letter-spacing: 0.12em; text-transform: uppercase; padding: 4px 11px; border: 0.5px solid; }
+  .event-tag-sport { color: var(--gold); border-color: rgba(201,168,76,0.35); }
+  .event-tag-music { color: #9BB8D4; border-color: rgba(155,184,212,0.35); }
+  .event-tag-corp  { color: #A8C5A0; border-color: rgba(168,197,160,0.35); }
+  .surge-badge {
+    font-size: 8px; letter-spacing: 0.16em; text-transform: uppercase;
+    background: rgba(201,168,76,0.12); color: var(--gold);
+    padding: 4px 9px; border: 0.5px solid rgba(201,168,76,0.28);
+    position: absolute; top: 18px; right: 18px;
+  }
+
+  /* ── PROXIMITY STRIP ── */
+  .proximity-strip {
+    padding: 70px 60px; background: var(--gold-pale);
+    border-top: 0.5px solid var(--border-hard);
+    border-bottom: 0.5px solid var(--border-hard);
+    display: flex; align-items: center; gap: 80px; flex-wrap: wrap;
+  }
+  .proximity-headline { font-family: var(--font-display); font-size: 40px; font-weight: 300; flex: 0 0 320px; line-height: 1.2; color: var(--ink); }
+  .proximity-headline em { font-style: italic; color: var(--gold); }
+  .proximity-items { flex: 1; display: flex; flex-direction: column; gap: 16px; }
+  .proximity-item { display: flex; align-items: flex-start; gap: 16px; font-size: 13px; color: var(--ink-mid); line-height: 1.5; }
+  .prox-dot { width: 6px; height: 6px; background: var(--gold); flex-shrink: 0; margin-top: 5px; }
+
+  /* ── STRATEGY ── */
+  .strategy-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 36px; margin-top: 60px; }
+  .strategy-card { padding: 36px 30px; border: 0.5px solid var(--border-hard); background: var(--surface); }
+  .strategy-num { font-family: var(--font-display); font-size: 72px; font-weight: 300; color: var(--border-hard); line-height: 1; margin-bottom: 18px; }
+  .strategy-title { font-family: var(--font-display); font-size: 24px; font-weight: 400; color: var(--ink); margin-bottom: 12px; }
+  .strategy-body { font-size: 13px; color: var(--muted); line-height: 1.75; font-weight: 300; }
+
+  /* ── PARTNERSHIPS ── */
+  .partnership-row { display: flex; gap: 28px; margin-top: 52px; flex-wrap: wrap; }
+  .partner-card { flex: 1; min-width: 210px; border: 0.5px solid var(--border-hard); padding: 30px 26px; }
+  .partner-icon { width: 44px; height: 44px; background: var(--gold-pale); display: flex; align-items: center; justify-content: center; margin-bottom: 18px; font-size: 20px; }
+  .partner-title { font-family: var(--font-display); font-size: 20px; color: var(--ink); margin-bottom: 10px; }
+  .partner-body { font-size: 12px; color: var(--muted); line-height: 1.7; font-weight: 300; }
+
+  /* ── CTA ── */
+  .cta-section { padding: 120px 60px; background: var(--ink); text-align: center; }
+  .cta-eyebrow { font-size: 9px; letter-spacing: 0.24em; text-transform: uppercase; color: var(--gold); margin-bottom: 22px; }
+  .cta-h2 { font-family: var(--font-display); font-size: clamp(46px, 5.5vw, 80px); font-weight: 300; color: #fff; line-height: 1.1; margin-bottom: 14px; }
+  .cta-h2 em { font-style: italic; color: var(--gold-light); }
+  .cta-sub { font-size: 15px; color: rgba(255,255,255,0.4); max-width: 500px; margin: 0 auto 48px; line-height: 1.75; font-weight: 300; }
+  .cta-group { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; }
+
+  /* ── FOOTER ── */
+  .footer { padding: 60px 60px 40px; background: var(--ink); border-top: 0.5px solid rgba(255,255,255,0.07); }
+  .footer-inner { display: flex; gap: 60px; flex-wrap: wrap; margin-bottom: 48px; }
+  .footer-brand { flex: 0 0 260px; }
+  .footer-logo { font-family: var(--font-display); font-size: 24px; font-weight: 400; color: rgba(255,255,255,0.6); margin-bottom: 16px; display: block; }
+  .footer-logo span { color: var(--gold); }
+  .footer-tagline { font-size: 12px; color: rgba(255,255,255,0.3); line-height: 1.65; font-weight: 300; }
+  .footer-col h5 { font-size: 9px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--gold); margin-bottom: 16px; }
+  .footer-col ul { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+  .footer-col ul a { font-size: 12px; color: rgba(255,255,255,0.35); text-decoration: none; transition: color 0.2s; }
+  .footer-col ul a:hover { color: rgba(255,255,255,0.8); }
+  .footer-bottom { border-top: 0.5px solid rgba(255,255,255,0.07); padding-top: 24px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px; }
+  .footer-copy { font-size: 11px; color: rgba(255,255,255,0.2); letter-spacing: 0.04em; }
+  .footer-legal { display: flex; gap: 20px; }
+  .footer-legal a { font-size: 11px; color: rgba(255,255,255,0.2); text-decoration: none; }
+  .footer-legal a:hover { color: rgba(255,255,255,0.5); }
+
+  /* ── MOBILE ── */
+  @media (max-width: 900px) {
+    .nav { padding: 16px 24px; }
+    .nav-links, .nav-cta { display: none; }
+    .nav-hamburger { display: flex; }
+    .nav-mobile-open .nav-links { display: flex; flex-direction: column; position: absolute; top: 100%; left: 0; right: 0; background: var(--surface); padding: 24px; border-bottom: 0.5px solid var(--border-hard); gap: 18px; z-index: 200; }
+    .nav-mobile-open .nav-cta { display: block; margin: 8px 24px 24px; text-align: center; }
+
+    .section { padding: 70px 24px; }
+    .hero-content { padding: 0 24px 80px; }
+    .hero-tag { left: 24px; }
+    .hero-stats { display: none; }
+    .hero-ornament { display: none; }
+
+    .tribes-grid { grid-template-columns: 1fr 1fr; }
+    .venues-layout { grid-template-columns: 1fr; }
+    .venue-detail { margin-top: 0; }
+    .events-grid { grid-template-columns: 1fr; }
+    .strategy-grid { grid-template-columns: 1fr; }
+    .partnership-row { flex-direction: column; }
+    .proximity-strip { padding: 50px 24px; flex-direction: column; gap: 32px; }
+    .proximity-headline { flex: 0 0 auto; }
+    .search-bar { flex-direction: column; }
+    .search-field { border-right: none; border-bottom: 0.5px solid var(--border-hard); }
+    .search-submit { padding: 18px; }
+    .divider { padding: 0 24px; }
+    .footer { padding: 48px 24px 32px; }
+    .footer-inner { flex-direction: column; gap: 36px; }
+    .cta-section { padding: 80px 24px; }
+  }
+  @media (max-width: 560px) {
+    .tribes-grid { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="nav" id="mainNav">
+  <a href="#" class="nav-logo">Event<span>Stays</span></a>
+  <ul class="nav-links">
+    <li><a href="#venues">Venues</a></li>
+    <li><a href="#events">Events</a></li>
+    <li><a href="#tribes">Tribes</a></li>
+    <li><a href="#strategy">Strategy</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+  <a href="#search" class="nav-cta">Find Your Stay</a>
+  <button class="nav-hamburger" aria-label="Menu" onclick="toggleMenu()">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-texture"></div>
+  <div class="hero-ornament"></div>
+  <div class="hero-tag">
+    <div class="hero-tag-line"></div>
+    <div class="hero-tag-text">Luxury Event Accommodation · UK</div>
+  </div>
+  <div class="hero-content">
+    <div class="hero-eyebrow">The UK's Premier Event Stays</div>
+    <h1 class="hero-h1">Where <em>proximity</em><br>meets luxury</h1>
+    <p class="hero-subtitle">Handpicked private residences — steps from the stadiums, arenas, and venues that matter. Curated for athletes, executives, and discerning travellers.</p>
+    <div class="hero-actions">
+      <a href="#venues" class="btn-primary">Browse by Venue</a>
+      <a href="#events" class="btn-ghost">View 2026 Events →</a>
+    </div>
+  </div>
+  <div class="hero-stats">
+    <div>
+      <div class="hero-stat-num">47</div>
+      <div class="hero-stat-label">Major Venues</div>
+    </div>
+    <div>
+      <div class="hero-stat-num">120+</div>
+      <div class="hero-stat-label">Luxury Properties</div>
+    </div>
+    <div>
+      <div class="hero-stat-num">25yrs</div>
+      <div class="hero-stat-label">Curating Excellence</div>
+    </div>
+  </div>
+</section>
+
+<!-- SEARCH -->
+<section class="section" id="search" style="padding-top:80px;padding-bottom:80px;">
+  <div class="section-label">Search by venue or event</div>
+  <h2 class="section-h2">Find your <em>perfect base</em></h2>
+  <div class="search-wrap">
+    <div class="search-bar">
+      <div class="search-field">
+        <label for="sf-venue">Venue / City</label>
+        <select id="sf-venue">
+          <option>O2 Arena, London</option>
+          <option>ExCeL London</option>
+          <option>Old Trafford, Manchester</option>
+          <option>NEC Birmingham</option>
+          <option>Wembley Stadium</option>
+          <option>Ascot Racecourse</option>
+          <option>AO Arena, Manchester</option>
+          <option>Cheltenham Racecourse</option>
+        </select>
+      </div>
+      <div class="search-field">
+        <label for="sf-type">Event Type</label>
+        <select id="sf-type">
+          <option>Any Event</option>
+          <option>Sports / Martial Arts</option>
+          <option>Football / Basketball</option>
+          <option>Horse Racing</option>
+          <option>Business Conference</option>
+          <option>Music / Entertainment</option>
+        </select>
+      </div>
+      <div class="search-field">
+        <label for="sf-dates">Dates</label>
+        <input type="text" id="sf-dates" placeholder="Add dates" />
+      </div>
+      <div class="search-field">
+        <label for="sf-guests">Guests</label>
+        <select id="sf-guests">
+          <option>1–2 guests</option>
+          <option>3–6 guests</option>
+          <option>7–12 guests</option>
+          <option>Group 13+</option>
+        </select>
+      </div>
+      <div class="search-field">
+        <button class="search-submit" onclick="alert('Search functionality — connect to your booking engine here.')">Search Stays</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"><div class="divider-line"></div><div class="divider-ornament">◆</div><div class="divider-line"></div></div>
+
+<!-- EVENT TRIBES -->
+<section class="section" id="tribes">
+  <div class="section-label">Tailored to your world</div>
+  <h2 class="section-h2">Your <em>tribe,</em><br>your stay</h2>
+  <p class="section-intro">Every event has its own culture, its own needs. We don't just rent homes — we match the right property to the right traveller.</p>
+
+  <div class="tribes-grid">
+    <div class="tribe-card">
+      <div class="tribe-badge">Athletes</div>
+      <div class="tribe-icon-bg">🥋</div>
+      <div class="tribe-name">Martial Arts</div>
+      <div class="tribe-role">BJJ · MMA · Grappling</div>
+      <ul class="tribe-keywords">
+        <li>High-end laundry for Gis</li>
+        <li>Meal-prep kitchens</li>
+        <li>Arena-adjacent locations</li>
+        <li>Recovery-focused spaces</li>
+      </ul>
+    </div>
+    <div class="tribe-card">
+      <div class="tribe-badge">Supporters</div>
+      <div class="tribe-icon-bg">⚽</div>
+      <div class="tribe-name">Football</div>
+      <div class="tribe-role">Premier League · Cups</div>
+      <ul class="tribe-keywords">
+        <li>Multiple large-screen TVs</li>
+        <li>Secure parking</li>
+        <li>Walk-to-stadium locations</li>
+        <li>High-speed Wi-Fi</li>
+      </ul>
+    </div>
+    <div class="tribe-card">
+      <div class="tribe-badge">Bleisure</div>
+      <div class="tribe-icon-bg">💼</div>
+      <div class="tribe-name">Conferences</div>
+      <div class="tribe-role">Corporate · Delegate</div>
+      <ul class="tribe-keywords">
+        <li>Dedicated workspaces</li>
+        <li>Quiet, executive interiors</li>
+        <li>Concierge services</li>
+        <li>Group business stays</li>
+      </ul>
+    </div>
+    <div class="tribe-card">
+      <div class="tribe-badge">Prestige</div>
+      <div class="tribe-icon-bg">🏇</div>
+      <div class="tribe-name">Horse Racing</div>
+      <div class="tribe-role">Cheltenham · Ascot · York</div>
+      <ul class="tribe-keywords">
+        <li>Champagne on arrival</li>
+        <li>High-end aesthetics</li>
+        <li>Transport concierge</li>
+        <li>Exclusive group homes</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- VENUES -->
+<section class="section section-alt" id="venues">
+  <div class="section-label">Proximity is everything</div>
+  <h2 class="section-h2">Venue-specific<br><em>landing pages</em></h2>
+  <p class="section-intro">Each venue has its own dedicated page — with long-tail keywords, walking distances, and upcoming event dates built in for maximum search intent capture.</p>
+
+  <div class="venues-layout">
+    <div class="venue-list">
+      <div class="venue-item active" onclick="selectVenue(this,'o2')">
+        <div>
+          <div class="venue-item-name">The O2 Arena</div>
+          <div class="venue-item-loc">North Greenwich, London</div>
+        </div>
+        <div class="venue-arrow">→</div>
+      </div>
+      <div class="venue-item" onclick="selectVenue(this,'excel')">
+        <div>
+          <div class="venue-item-name">ExCeL London</div>
+          <div class="venue-item-loc">Royal Docks, London</div>
+        </div>
+        <div class="venue-arrow">→</div>
+      </div>
+      <div class="venue-item" onclick="selectVenue(this,'trafford')">
+        <div>
+          <div class="venue-item-name">Old Trafford</div>
+          <div class="venue-item-loc">Trafford, Manchester</div>
+        </div>
+        <div class="venue-arrow">→</div>
+      </div>
+      <div class="venue-item" onclick="selectVenue(this,'nec')">
+        <div>
+          <div class="venue-item-name">NEC Birmingham</div>
+          <div class="venue-item-loc">Bickenhill, Birmingham</div>
+        </div>
+        <div class="venue-arrow">→</div>
+      </div>
+      <div class="venue-item" onclick="selectVenue(this,'ascot')">
+        <div>
+          <div class="venue-item-name">Ascot Racecourse</div>
+          <div class="venue-item-loc">Windsor, Berkshire</div>
+        </div>
+        <div class="venue-arrow">→</div>
+      </div>
+      <div class="venue-item" onclick="selectVenue(this,'ao')">
+        <div>
+          <div class="venue-item-name">AO Arena</div>
+          <div class="venue-item-loc">Victoria, Manchester</div>
+        </div>
+        <div class="venue-arrow">→</div>
+      </div>
+    </div>
+
+    <div class="venue-detail">
+      <div class="venue-detail-eyebrow" id="vEyebrow">Featured Venue · London</div>
+      <div class="venue-detail-name" id="vName">The O2 Arena</div>
+      <div class="venue-detail-dist" id="vDist">Properties from 4 min walk · Jubilee Line direct · Ample parking</div>
+      <div class="venue-detail-kw">
+        <div class="venue-detail-kw-label">Target SEO keywords</div>
+        <div class="kw-tags" id="vKeywords">
+          <span class="kw-tag">luxury rentals near O2</span>
+          <span class="kw-tag">stay within 10 min O2</span>
+          <span class="kw-tag">O2 concert accommodation</span>
+          <span class="kw-tag">group stays North Greenwich</span>
+        </div>
+      </div>
+      <div class="venue-events-wrap">
+        <div class="venue-events-label">Upcoming events — surge pricing active</div>
+        <div id="vEvents">
+          <span class="event-pill">Adele Live <span class="event-pill-date">Jun 2026</span></span>
+          <span class="event-pill">BJJ London Open <span class="event-pill-date">Sep 2026</span></span>
+          <span class="event-pill">NBA Global <span class="event-pill-date">Oct 2026</span></span>
+        </div>
+      </div>
+      <button class="venue-cta" id="vCta">View O2 Properties →</button>
+    </div>
+  </div>
+</section>
+
+<!-- EVENTS CALENDAR -->
+<section class="section section-dark" id="events">
+  <div class="calendar-top">
+    <div>
+      <div class="section-label" style="color:var(--gold);">City event calendar</div>
+      <h2 class="section-h2 section-h2-light">High-demand<br><em>dates 2026</em></h2>
+      <p class="section-intro section-intro-light">Published 6 months ahead. Surge pricing activates automatically via PriceLabs on announcement.</p>
+    </div>
+    <a href="#" class="btn-ghost">Full Calendar →</a>
+  </div>
+  <div class="events-grid">
+    <div class="event-card">
+      <div class="event-card-month">May 2026</div>
+      <div class="event-card-bg-date">23</div>
+      <div class="event-card-name">UEFA Europa League Final</div>
+      <div class="event-card-venue">Wembley Stadium, London</div>
+      <div class="event-card-tags">
+        <span class="event-tag event-tag-sport">Football</span>
+        <span class="event-tag event-tag-sport">High Demand</span>
+      </div>
+      <span class="surge-badge">Surge Active</span>
+    </div>
+    <div class="event-card">
+      <div class="event-card-month">Jun 2026</div>
+      <div class="event-card-bg-date">16</div>
+      <div class="event-card-name">Royal Ascot Week</div>
+      <div class="event-card-venue">Ascot Racecourse, Berkshire</div>
+      <div class="event-card-tags">
+        <span class="event-tag event-tag-sport">Horse Racing</span>
+        <span class="event-tag event-tag-sport">Prestige</span>
+      </div>
+      <span class="surge-badge">3-Night Min</span>
+    </div>
+    <div class="event-card">
+      <div class="event-card-month">Jul 2026</div>
+      <div class="event-card-bg-date">04</div>
+      <div class="event-card-name">UK BJJ Nationals</div>
+      <div class="event-card-venue">ExCeL London</div>
+      <div class="event-card-tags">
+        <span class="event-tag event-tag-sport">Martial Arts</span>
+        <span class="event-tag event-tag-sport">Athletes</span>
+      </div>
+    </div>
+    <div class="event-card">
+      <div class="event-card-month">Sep 2026</div>
+      <div class="event-card-bg-date">12</div>
+      <div class="event-card-name">The Royal Highland Show</div>
+      <div class="event-card-venue">Royal Highland Centre, Edinburgh</div>
+      <div class="event-card-tags">
+        <span class="event-tag event-tag-corp">Corporate</span>
+        <span class="event-tag event-tag-corp">Annual</span>
+      </div>
+    </div>
+    <div class="event-card">
+      <div class="event-card-month">Oct 2026</div>
+      <div class="event-card-bg-date">08</div>
+      <div class="event-card-name">NHS ConfEx 2026</div>
+      <div class="event-card-venue">NEC Birmingham</div>
+      <div class="event-card-tags">
+        <span class="event-tag event-tag-corp">Conference</span>
+        <span class="event-tag event-tag-corp">Bleisure</span>
+      </div>
+    </div>
+    <div class="event-card">
+      <div class="event-card-month">Nov 2026</div>
+      <div class="event-card-bg-date">19</div>
+      <div class="event-card-name">NBA Global Series</div>
+      <div class="event-card-venue">The O2 Arena, London</div>
+      <div class="event-card-tags">
+        <span class="event-tag event-tag-sport">Basketball</span>
+        <span class="event-tag event-tag-music">Premium</span>
+      </div>
+      <span class="surge-badge">Surge Active</span>
+    </div>
+  </div>
+</section>
+
+<!-- PROXIMITY STRIP -->
+<div class="proximity-strip">
+  <div class="proximity-headline">"<em>10 minutes</em><br>from the venue"</div>
+  <div class="proximity-items">
+    <div class="proximity-item"><div class="prox-dot"></div><span>Walking distance keywords outrank generic luxury searches by 3.4× on Google</span></div>
+    <div class="proximity-item"><div class="prox-dot"></div><span>Venue-specific pages capture high-intent traffic that broad platforms miss entirely</span></div>
+    <div class="proximity-item"><div class="prox-dot"></div><span>Event Schema markup signals availability directly to Google's calendar results</span></div>
+    <div class="proximity-item"><div class="prox-dot"></div><span>Governing body partnerships add a "preferred stay" trust signal to each listing</span></div>
+  </div>
+</div>
+
+<!-- SEO STRATEGY -->
+<section class="section" id="strategy">
+  <div class="section-label">The strategy behind the stays</div>
+  <h2 class="section-h2">Built for<br><em>intent, not browse</em></h2>
+  <div class="strategy-grid">
+    <div class="strategy-card">
+      <div class="strategy-num">01</div>
+      <div class="strategy-title">Proximity SEO</div>
+      <div class="strategy-body">Venue-specific landing pages target the exact searches event travellers make — "luxury 2-bed, 2 stops from AO Arena on the Metrolink." Broad platforms like Airbnb cannot compete with this level of intent specificity.</div>
+    </div>
+    <div class="strategy-card">
+      <div class="strategy-num">02</div>
+      <div class="strategy-title">Dynamic Surge Pricing</div>
+      <div class="strategy-body">PriceLabs integration monitors event announcements and automatically adjusts rates. 2–3 night minimums prevent high-turnover single-night bookings and protect your margins around every major event.</div>
+    </div>
+    <div class="strategy-card">
+      <div class="strategy-num">03</div>
+      <div class="strategy-title">Governing Body Deals</div>
+      <div class="strategy-body">Exclusive partnerships with UK governing bodies — BJJ, Basketball, Racing — position each property as the "preferred accommodation" on official event pages, driving qualified referral traffic at zero ad spend.</div>
+    </div>
+  </div>
+</section>
+
+<!-- PARTNERSHIPS -->
+<section class="section section-alt">
+  <div class="section-label">Partnership opportunities</div>
+  <h2 class="section-h2">Beyond<br><em>Airbnb</em></h2>
+  <p class="section-intro">We win in the UK market by building direct relationships, not relying on platforms that take 15–20% and flatten your listing into a commodity.</p>
+  <div class="partnership-row">
+    <div class="partner-card">
+      <div class="partner-icon">🏛️</div>
+      <div class="partner-title">Governing Bodies</div>
+      <div class="partner-body">Become the preferred stay for BJJ, Basketball, and Racing UK governing bodies. Members receive discount codes; you receive qualified, loyal bookings year after year.</div>
+    </div>
+    <div class="partner-card">
+      <div class="partner-icon">🚇</div>
+      <div class="partner-title">Transport-Led SEO</div>
+      <div class="partner-body">In London and Manchester, describe properties by Tube stop or Metrolink station. "2 stops from the venue" converts faster than any postcode or street address.</div>
+    </div>
+    <div class="partner-card">
+      <div class="partner-icon">📰</div>
+      <div class="partner-title">City Event Journal</div>
+      <div class="partner-body">A freshness-led blog updated 6 months ahead of each event. "Ultimate Guide to Staying in Glasgow for BJJ Nationals" captures top-of-funnel travellers before they ever visit a booking platform.</div>
+    </div>
+    <div class="partner-card">
+      <div class="partner-icon">🎯</div>
+      <div class="partner-title">Tribe Marketing</div>
+      <div class="partner-body">Email campaigns to martial arts clubs, corporate travel managers, and racing societies. These "tribes" book in groups, return annually, and refer within their community.</div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-section" id="contact">
+  <div class="cta-eyebrow">Your next move</div>
+  <h2 class="cta-h2">Start with<br><em>one venue</em></h2>
+  <p class="cta-sub">Pick one city. Pick one venue. Build the landing page today. "The Best Luxury Stays for O2 Arena Events 2026" is waiting to rank — and waiting for your guests.</p>
+  <div class="cta-group">
+    <a href="#search" class="btn-primary">Browse All Venues</a>
+    <a href="mailto:hello@eventstays.co.uk" class="btn-ghost">Get in Touch →</a>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="footer-inner">
+    <div class="footer-brand">
+      <span class="footer-logo">Event<span>Stays</span></span>
+      <p class="footer-tagline">Luxury private residences positioned around the UK's most sought-after stadiums, arenas, and conference centres. Celebrating 25 years of extraordinary escapes.</p>
+    </div>
+    <div class="footer-col">
+      <h5>Venues</h5>
+      <ul>
+        <li><a href="#">O2 Arena, London</a></li>
+        <li><a href="#">ExCeL London</a></li>
+        <li><a href="#">Old Trafford</a></li>
+        <li><a href="#">NEC Birmingham</a></li>
+        <li><a href="#">Ascot Racecourse</a></li>
+        <li><a href="#">Wembley Stadium</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h5>Event Types</h5>
+      <ul>
+        <li><a href="#">Martial Arts Stays</a></li>
+        <li><a href="#">Football Weekends</a></li>
+        <li><a href="#">Conference Accommodation</a></li>
+        <li><a href="#">Horse Racing Retreats</a></li>
+        <li><a href="#">Music &amp; Entertainment</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h5>Company</h5>
+      <ul>
+        <li><a href="#">About Us</a></li>
+        <li><a href="#">Journal</a></li>
+        <li><a href="#">Partner with Us</a></li>
+        <li><a href="#">List Your Property</a></li>
+        <li><a href="#">Privacy Policy</a></li>
+        <li><a href="#">Terms &amp; Conditions</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <div class="footer-copy">© 2026 EventStays Ltd. All rights reserved.</div>
+    <div class="footer-legal">
+      <a href="#">Privacy</a>
+      <a href="#">Cookies</a>
+      <a href="#">Sitemap</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+  const venueData = {
+    o2: {
+      eyebrow: 'Featured Venue · London',
+      name: 'The O2 Arena',
+      dist: 'Properties from 4 min walk · Jubilee Line direct · Ample parking',
+      keywords: ['luxury rentals near O2', 'stay within 10 min O2', 'O2 concert accommodation', 'group stays North Greenwich'],
+      events: [['Adele Live', 'Jun 2026'], ['BJJ London Open', 'Sep 2026'], ['NBA Global', 'Oct 2026']]
+    },
+    excel: {
+      eyebrow: 'Conference Venue · East London',
+      name: 'ExCeL London',
+      dist: 'Properties from 7 min walk · Elizabeth Line 3 stops · DLR direct',
+      keywords: ['accommodation near ExCeL', 'delegate housing Royal Docks', 'conference stay East London', 'group corporate ExCeL'],
+      events: [['UK BJJ Nationals', 'Jul 2026'], ['DSEI 2026', 'Sep 2026'], ['Grand Designs Live', 'Oct 2026']]
+    },
+    trafford: {
+      eyebrow: 'Stadium Venue · Manchester',
+      name: 'Old Trafford',
+      dist: 'Properties from 8 min walk · Metrolink 2 stops · Matchday parking',
+      keywords: ['luxury stay Old Trafford', 'executive matchday rental', 'Man Utd accommodation', 'stadium apartments Manchester'],
+      events: [['Premier League Derby', 'Mar 2026'], ['Champions League Night', 'Apr 2026'], ['FA Cup Round', 'May 2026']]
+    },
+    nec: {
+      eyebrow: 'Exhibition Venue · Birmingham',
+      name: 'NEC Birmingham',
+      dist: 'Properties from 5 min drive · Birmingham Airport 2 min · M42 direct access',
+      keywords: ['accommodation near NEC', 'delegate housing Birmingham', 'conference stay Solihull', 'group corporate NEC'],
+      events: [['NHS ConfEx', 'Oct 2026'], ['Crufts 2026', 'Mar 2026'], ['Gadget Show Live', 'Nov 2026']]
+    },
+    ascot: {
+      eyebrow: 'Racecourse · Berkshire',
+      name: 'Ascot Racecourse',
+      dist: 'Exclusive estates within 15 min drive · Private transport arranged · Champagne welcome',
+      keywords: ['luxury stay Royal Ascot', 'Ascot group rental', 'racing hospitality accommodation', 'Berkshire country house Ascot week'],
+      events: [['Royal Ascot Week', 'Jun 2026'], ['King George VI Stakes', 'Jul 2026'], ['QIPCO Champions Day', 'Oct 2026']]
+    },
+    ao: {
+      eyebrow: 'Arena Venue · Manchester',
+      name: 'AO Arena',
+      dist: 'Properties from 6 min walk · Metrolink Victoria stop · City centre location',
+      keywords: ['luxury 2-bed near AO Arena', 'accommodation AO Arena Manchester', 'concert stay Northern Quarter', 'Metrolink 2 stops AO Arena'],
+      events: [['Red Hot Chili Peppers', 'May 2026'], ['EuroBasket Qualifier', 'Aug 2026'], ['Strictly Live Tour', 'Jan 2027']]
+    }
+  };
+
+  function selectVenue(el, key) {
+    document.querySelectorAll('.venue-item').forEach(function(i) { i.classList.remove('active'); });
+    el.classList.add('active');
+    var d = venueData[key];
+    document.getElementById('vEyebrow').textContent = d.eyebrow;
+    document.getElementById('vName').textContent = d.name;
+    document.getElementById('vDist').textContent = d.dist;
+    var kwEl = document.getElementById('vKeywords');
+    kwEl.innerHTML = d.keywords.map(function(k) { return '<span class="kw-tag">' + k + '</span>'; }).join('');
+    var evEl = document.getElementById('vEvents');
+    evEl.innerHTML = d.events.map(function(e) {
+      return '<span class="event-pill">' + e[0] + ' <span class="event-pill-date">' + e[1] + '</span></span>';
+    }).join('');
+    document.getElementById('vCta').textContent = 'View ' + d.name.split(' ').slice(0,2).join(' ') + ' Properties →';
+  }
+
+  function toggleMenu() {
+    document.getElementById('mainNav').classList.toggle('nav-mobile-open');
+  }
+
+  // Close mobile menu on link click
+  document.querySelectorAll('.nav-links a').forEach(function(a) {
+    a.addEventListener('click', function() {
+      document.getElementById('mainNav').classList.remove('nav-mobile-open');
+    });
+  });
+</script>
+</body>
+</html>
