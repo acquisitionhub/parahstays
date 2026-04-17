@@ -1,0 +1,1204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Parah Stays — Accommodation Built for Construction Contractors</title>
+<meta name="description" content="Short-term stays near UK construction sites, plant depots and project zones. Built for contractors, site managers and trade workers." />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700;1,900&family=IBM+Plex+Sans:wght@300;400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet" />
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --steel: #1C2127;
+    --steel-mid: #2D3440;
+    --steel-light: #3E4856;
+    --amber: #E8A020;
+    --amber-dim: #B87D18;
+    --amber-pale: #FDF3E0;
+    --concrete: #F0EDE8;
+    --concrete-mid: #E2DDD7;
+    --dust: #9AA0AB;
+    --ink: #111418;
+    --paper: #F8F6F2;
+    --red: #C0392B;
+    --green: #27753A;
+    --blue: #1A4A7A;
+    --font-display: 'Playfair Display', Georgia, serif;
+    --font-body: 'IBM Plex Sans', sans-serif;
+    --font-mono: 'IBM Plex Mono', monospace;
+    --rule: 2px solid var(--steel);
+    --rule-thin: 1px solid var(--concrete-mid);
+    --rule-amber: 2px solid var(--amber);
+  }
+
+  html { scroll-behavior: smooth; }
+  body { font-family: var(--font-body); background: var(--paper); color: var(--ink); line-height: 1.55; font-size: 15px; -webkit-font-smoothing: antialiased; }
+
+  ::-webkit-scrollbar { width: 3px; }
+  ::-webkit-scrollbar-track { background: var(--concrete); }
+  ::-webkit-scrollbar-thumb { background: var(--amber); }
+
+  /* ── TICKER ── */
+  .ticker-wrap {
+    background: var(--steel); overflow: hidden; white-space: nowrap;
+    padding: 8px 0; border-bottom: 2px solid var(--amber);
+  }
+  .ticker-inner { display: inline-flex; animation: ticker 50s linear infinite; }
+  .ticker-item {
+    display: inline-flex; align-items: center; gap: 12px;
+    padding: 0 40px; font-family: var(--font-mono); font-size: 11px;
+    color: rgba(255,255,255,0.7); letter-spacing: 0.04em;
+  }
+  .ticker-item::before { content: '◆'; color: var(--amber); font-size: 8px; }
+  @keyframes ticker { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+
+  /* ── TOP BAR ── */
+  .topbar {
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 8px 48px; background: var(--concrete); border-bottom: var(--rule-thin);
+    font-family: var(--font-mono); font-size: 10px; color: var(--dust); letter-spacing: 0.08em;
+  }
+  .topbar-right { display: flex; gap: 20px; }
+  .topbar-right a { color: var(--dust); text-decoration: none; }
+  .topbar-right a:hover { color: var(--amber); }
+
+  /* ── NAV ── */
+  .nav {
+    background: var(--steel); position: sticky; top: 0; z-index: 300;
+    border-bottom: 3px solid var(--amber);
+  }
+  .nav-inner { display: flex; align-items: stretch; padding: 0 48px; gap: 0; }
+  .nav-logo {
+    font-family: var(--font-display); font-size: 24px; font-weight: 900;
+    color: #fff; text-decoration: none; padding: 16px 40px 16px 0;
+    border-right: 1px solid rgba(255,255,255,0.1); letter-spacing: -0.01em;
+    white-space: nowrap; display: flex; align-items: center;
+  }
+  .nav-logo .logo-stays { color: var(--amber); }
+  .nav-links { display: flex; list-style: none; flex: 1; }
+  .nav-links a {
+    display: flex; align-items: center; padding: 0 18px;
+    font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase;
+    color: rgba(255,255,255,0.6); text-decoration: none;
+    border-right: 1px solid rgba(255,255,255,0.06);
+    transition: all 0.15s; font-weight: 500; white-space: nowrap;
+  }
+  .nav-links a:hover { color: var(--amber); background: rgba(232,160,32,0.07); }
+  .nav-links a.active { color: var(--amber); }
+  .nav-right { display: flex; align-items: center; margin-left: auto; }
+  .nav-cta {
+    background: var(--amber); color: var(--ink); font-weight: 600;
+    font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase;
+    padding: 0 24px; text-decoration: none; display: flex; align-items: center;
+    transition: background 0.15s; height: 100%;
+  }
+  .nav-cta:hover { background: #f0b030; }
+  .nav-hamburger { display: none; background: none; border: none; cursor: pointer; padding: 16px; }
+  .nav-hamburger span { display: block; width: 22px; height: 2px; background: #fff; margin: 4px 0; }
+
+  /* ── HERO ── */
+  .hero { background: var(--steel); border-bottom: var(--rule-amber); }
+  .hero-inner { display: grid; grid-template-columns: 1fr 340px; max-width: 1280px; margin: 0 auto; }
+
+  .hero-lead {
+    padding: 52px 48px 52px 48px; border-right: 1px solid rgba(255,255,255,0.1);
+    position: relative;
+  }
+  .hero-lead::after {
+    content: ''; position: absolute; inset: 0;
+    background: linear-gradient(135deg, rgba(232,160,32,0.04) 0%, transparent 60%);
+    pointer-events: none;
+  }
+  .hero-section-tag {
+    display: inline-flex; align-items: center; gap: 8px;
+    font-family: var(--font-mono); font-size: 9px; letter-spacing: 0.2em;
+    text-transform: uppercase; color: var(--amber); margin-bottom: 18px;
+  }
+  .hero-section-tag::before { content: ''; display: inline-block; width: 16px; height: 2px; background: var(--amber); }
+  .hero-h1 {
+    font-family: var(--font-display); font-size: clamp(32px, 4.5vw, 62px);
+    font-weight: 900; line-height: 1.05; color: #fff; margin-bottom: 18px;
+  }
+  .hero-h1 em { font-style: italic; color: var(--amber); }
+  .hero-excerpt { font-size: 16px; color: rgba(255,255,255,0.5); line-height: 1.75; max-width: 560px; font-weight: 300; margin-bottom: 32px; }
+  .hero-actions { display: flex; gap: 12px; flex-wrap: wrap; }
+  .btn-primary {
+    background: var(--amber); color: var(--ink); font-family: var(--font-body);
+    font-weight: 600; font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase;
+    padding: 14px 32px; border: none; cursor: pointer; transition: background 0.15s;
+    text-decoration: none; display: inline-block;
+  }
+  .btn-primary:hover { background: #f0b030; }
+  .btn-ghost {
+    background: transparent; color: rgba(255,255,255,0.6); font-family: var(--font-body);
+    font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase;
+    padding: 14px 32px; border: 1px solid rgba(255,255,255,0.2); cursor: pointer;
+    transition: all 0.15s; text-decoration: none; display: inline-block; font-weight: 500;
+  }
+  .btn-ghost:hover { border-color: var(--amber); color: var(--amber); }
+  .hero-stats { display: flex; gap: 40px; margin-top: 40px; padding-top: 32px; border-top: 1px solid rgba(255,255,255,0.08); }
+  .hero-stat-num { font-family: var(--font-display); font-size: 36px; font-weight: 900; color: var(--amber); line-height: 1; }
+  .hero-stat-label { font-family: var(--font-mono); font-size: 9px; letter-spacing: 0.14em; text-transform: uppercase; color: rgba(255,255,255,0.3); margin-top: 4px; }
+
+  .hero-sidebar { display: flex; flex-direction: column; }
+  .hero-sidebar-item {
+    padding: 24px 28px; border-bottom: 1px solid rgba(255,255,255,0.07);
+    cursor: pointer; transition: background 0.15s; flex: 1;
+  }
+  .hero-sidebar-item:hover { background: rgba(255,255,255,0.04); }
+  .hero-sidebar-item:last-child { border-bottom: none; }
+  .hsb-tag { font-family: var(--font-mono); font-size: 9px; letter-spacing: 0.16em; text-transform: uppercase; margin-bottom: 8px; }
+  .tag-civils { color: #CF8A3A; }
+  .tag-housing { color: #6DBF84; }
+  .tag-rail { color: #9B8FE0; }
+  .tag-energy { color: #5BA3DC; }
+  .tag-weekly { color: #E08080; }
+  .hsb-h3 { font-family: var(--font-display); font-size: 17px; font-weight: 700; color: #fff; line-height: 1.25; margin-bottom: 6px; }
+  .hsb-meta { font-family: var(--font-mono); font-size: 9px; color: var(--dust); letter-spacing: 0.06em; }
+
+  /* ── SEARCH BAR ── */
+  .search-section { background: var(--ink); padding: 36px 48px; border-bottom: 3px solid var(--amber); }
+  .search-label { font-family: var(--font-mono); font-size: 9px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--amber); margin-bottom: 14px; display: flex; align-items: center; gap: 10px; }
+  .search-label::before { content: ''; display: inline-block; width: 14px; height: 2px; background: var(--amber); }
+  .search-bar { display: flex; max-width: 1100px; border: 1px solid rgba(255,255,255,0.12); }
+  .search-field {
+    flex: 1; display: flex; flex-direction: column;
+    padding: 16px 20px; border-right: 1px solid rgba(255,255,255,0.1);
+    background: rgba(255,255,255,0.04);
+  }
+  .search-field label { font-family: var(--font-mono); font-size: 8px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--amber); margin-bottom: 5px; }
+  .search-field select,
+  .search-field input {
+    border: none; outline: none; font-family: var(--font-body);
+    font-size: 13px; color: #fff; background: transparent; padding: 0; width: 100%;
+  }
+  .search-field select option { background: var(--steel-mid); }
+  .search-submit {
+    background: var(--amber); color: var(--ink); border: none;
+    padding: 0 32px; font-family: var(--font-body);
+    font-size: 10px; letter-spacing: 0.16em; text-transform: uppercase;
+    cursor: pointer; white-space: nowrap; transition: background 0.15s;
+    min-width: 140px; font-weight: 700;
+  }
+  .search-submit:hover { background: #f0b030; }
+
+  /* ── DATA STRIP ── */
+  .data-strip { background: var(--steel); border-bottom: 3px solid var(--amber); }
+  .data-strip-inner { display: grid; grid-template-columns: repeat(5, 1fr); max-width: 1280px; margin: 0 auto; }
+  .data-cell { padding: 26px 32px; border-right: 1px solid rgba(255,255,255,0.07); text-align: center; }
+  .data-cell:last-child { border-right: none; }
+  .data-num { font-family: var(--font-display); font-size: 38px; font-weight: 900; color: var(--amber); line-height: 1; margin-bottom: 4px; }
+  .data-label { font-family: var(--font-mono); font-size: 9px; letter-spacing: 0.14em; text-transform: uppercase; color: rgba(255,255,255,0.3); }
+  .data-sub { font-family: var(--font-mono); font-size: 9px; color: var(--dust); margin-top: 4px; }
+
+  /* ── MAIN WRAP ── */
+  .main-wrap { max-width: 1280px; margin: 0 auto; padding: 0 48px; }
+
+  /* ── SECTION HEADER ── */
+  .section-header {
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 36px 0 20px; border-bottom: var(--rule);
+  }
+  .section-header-left { display: flex; align-items: center; gap: 16px; }
+  .section-name { font-family: var(--font-display); font-size: 22px; font-weight: 900; letter-spacing: -0.01em; color: var(--ink); }
+  .section-tag-pill { font-family: var(--font-mono); font-size: 9px; color: var(--dust); background: var(--concrete-mid); padding: 3px 10px; letter-spacing: 0.06em; }
+  .section-all { font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--amber); text-decoration: none; display: flex; align-items: center; gap: 6px; font-weight: 500; }
+  .section-all:hover { color: var(--amber-dim); }
+
+  /* ── TRIBES / CONTRACTOR TYPES ── */
+  .tribes-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 0; background: var(--concrete-mid); border: var(--rule-thin); }
+  .tribe-card {
+    background: var(--paper); padding: 30px 26px; border-right: var(--rule-thin);
+    cursor: pointer; position: relative; overflow: hidden; transition: background 0.2s;
+  }
+  .tribe-card:last-child { border-right: none; }
+  .tribe-card:hover { background: var(--steel); }
+  .tribe-card:hover .tribe-name { color: #fff; }
+  .tribe-card:hover .tribe-role { color: rgba(255,255,255,0.4); }
+  .tribe-card:hover .tribe-keywords li { color: rgba(255,255,255,0.55); }
+  .tribe-card:hover .tribe-icon-bg { background: rgba(232,160,32,0.15); }
+  .tribe-card:hover .tribe-keywords li::before { color: var(--amber); }
+  .tribe-icon-bg { width: 48px; height: 48px; background: var(--concrete); display: flex; align-items: center; justify-content: center; margin-bottom: 18px; font-size: 20px; transition: background 0.2s; }
+  .tribe-name { font-family: var(--font-display); font-size: 22px; font-weight: 700; color: var(--ink); margin-bottom: 4px; transition: color 0.2s; }
+  .tribe-role { font-family: var(--font-mono); font-size: 9px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--dust); margin-bottom: 16px; transition: color 0.2s; }
+  .tribe-keywords { list-style: none; display: flex; flex-direction: column; gap: 7px; }
+  .tribe-keywords li { font-size: 12px; color: var(--dust); transition: color 0.2s; display: flex; align-items: flex-start; gap: 8px; line-height: 1.4; }
+  .tribe-keywords li::before { content: '—'; color: var(--amber); font-size: 10px; flex-shrink: 0; margin-top: 1px; }
+  .tribe-badge { position: absolute; top: 18px; right: 18px; font-family: var(--font-mono); font-size: 8px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--amber); border: 1px solid rgba(232,160,32,0.3); padding: 3px 9px; }
+
+  /* ── SITE LISTINGS (venue-style) ── */
+  .sites-layout { display: grid; grid-template-columns: 1fr 1.1fr; gap: 0; margin-top: 0; align-items: start; border: var(--rule-thin); }
+  .site-list { }
+  .site-item {
+    padding: 20px 26px; border-bottom: var(--rule-thin);
+    cursor: pointer; transition: background 0.15s;
+    display: flex; align-items: center; justify-content: space-between;
+  }
+  .site-item:last-child { border-bottom: none; }
+  .site-item:hover, .site-item.active { background: var(--steel); }
+  .site-item:hover .site-item-name, .site-item.active .site-item-name { color: #fff; }
+  .site-item:hover .site-item-loc, .site-item.active .site-item-loc { color: rgba(255,255,255,0.4); }
+  .site-item:hover .site-arrow, .site-item.active .site-arrow { color: var(--amber); }
+  .site-item-name { font-family: var(--font-display); font-size: 19px; font-weight: 700; color: var(--ink); transition: color 0.15s; }
+  .site-item-loc { font-family: var(--font-mono); font-size: 10px; color: var(--dust); margin-top: 3px; letter-spacing: 0.06em; }
+  .site-arrow { color: var(--concrete-mid); font-size: 16px; transition: color 0.15s; }
+
+  .site-detail { background: var(--amber-pale); padding: 38px; border-left: var(--rule-thin); }
+  .site-detail-eyebrow { font-family: var(--font-mono); font-size: 9px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--amber-dim); margin-bottom: 10px; }
+  .site-detail-name { font-family: var(--font-display); font-size: 34px; font-weight: 900; color: var(--ink); line-height: 1.1; margin-bottom: 8px; }
+  .site-detail-dist { font-size: 13px; color: var(--steel-mid); margin-bottom: 24px; padding-bottom: 24px; border-bottom: var(--rule-thin); line-height: 1.65; font-weight: 300; }
+  .site-kw-label, .site-events-label { font-family: var(--font-mono); font-size: 9px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--dust); margin-bottom: 10px; }
+  .site-kw { margin-bottom: 22px; }
+  .kw-tags { display: flex; flex-wrap: wrap; gap: 7px; }
+  .kw-tag { font-family: var(--font-mono); font-size: 10px; background: #fff; border: 1px solid rgba(184,125,24,0.25); color: var(--steel-mid); padding: 4px 12px; letter-spacing: 0.04em; }
+  .phase-pill {
+    display: inline-flex; align-items: center; gap: 8px;
+    background: var(--steel); color: rgba(255,255,255,0.8);
+    font-size: 11px; padding: 7px 13px; margin: 0 6px 7px 0;
+  }
+  .phase-pill-date { color: var(--amber); font-family: var(--font-mono); font-size: 10px; }
+  .site-phases-wrap { margin-bottom: 24px; }
+  .site-cta {
+    background: var(--steel); color: #fff; border: none;
+    padding: 14px 28px; font-family: var(--font-body);
+    font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase;
+    cursor: pointer; width: 100%; transition: background 0.2s; font-weight: 600;
+  }
+  .site-cta:hover { background: var(--amber); color: var(--ink); }
+
+  /* ── ACTIVE PROJECTS GRID ── */
+  .projects-grid {
+    display: grid; grid-template-columns: repeat(3, 1fr);
+    gap: 0; background: var(--concrete-mid); border: var(--rule-thin);
+  }
+  .project-card { background: var(--steel); padding: 30px 26px; position: relative; cursor: pointer; transition: background 0.15s; }
+  .project-card:hover { background: var(--steel-mid); }
+  .project-card-month { font-family: var(--font-mono); font-size: 9px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--amber); margin-bottom: 8px; }
+  .project-card-bg-val {
+    font-family: var(--font-display); font-size: 60px; font-weight: 900;
+    color: rgba(255,255,255,0.04); line-height: 1; position: absolute;
+    top: 14px; right: 16px; pointer-events: none; letter-spacing: -0.02em;
+  }
+  .project-card-name { font-family: var(--font-display); font-size: 22px; font-weight: 700; color: #fff; margin-bottom: 6px; line-height: 1.2; }
+  .project-card-location { font-family: var(--font-mono); font-size: 10px; color: rgba(255,255,255,0.4); margin-bottom: 16px; letter-spacing: 0.04em; }
+  .project-card-tags { display: flex; gap: 6px; flex-wrap: wrap; }
+  .proj-tag { font-family: var(--font-mono); font-size: 9px; letter-spacing: 0.1em; text-transform: uppercase; padding: 3px 10px; border: 1px solid; }
+  .proj-tag-civils { color: #CF8A3A; border-color: rgba(207,138,58,0.35); }
+  .proj-tag-housing { color: #6DBF84; border-color: rgba(109,191,132,0.35); }
+  .proj-tag-rail { color: #9B8FE0; border-color: rgba(155,143,224,0.35); }
+  .proj-tag-energy { color: #5BA3DC; border-color: rgba(91,163,220,0.35); }
+  .proj-tag-healthcare { color: #E08080; border-color: rgba(224,128,128,0.35); }
+  .demand-badge {
+    font-family: var(--font-mono); font-size: 8px; letter-spacing: 0.14em; text-transform: uppercase;
+    background: rgba(232,160,32,0.14); color: var(--amber);
+    padding: 4px 9px; border: 1px solid rgba(232,160,32,0.3);
+    position: absolute; top: 16px; right: 16px;
+  }
+
+  /* ── WHY STRIP ── */
+  .why-strip {
+    padding: 64px 48px; background: var(--amber-pale);
+    border-top: 2px solid rgba(184,125,24,0.2);
+    border-bottom: 2px solid rgba(184,125,24,0.2);
+    display: flex; align-items: center; gap: 80px; flex-wrap: wrap;
+  }
+  .why-headline { font-family: var(--font-display); font-size: 38px; font-weight: 900; flex: 0 0 300px; line-height: 1.15; color: var(--ink); }
+  .why-headline em { font-style: italic; color: var(--amber-dim); }
+  .why-items { flex: 1; display: flex; flex-direction: column; gap: 14px; }
+  .why-item { display: flex; align-items: flex-start; gap: 14px; font-size: 13px; color: var(--steel-mid); line-height: 1.6; }
+  .why-dot { width: 6px; height: 6px; background: var(--amber); flex-shrink: 0; margin-top: 5px; }
+
+  /* ── STRATEGY ── */
+  .strategy-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0; border: var(--rule-thin); }
+  .strategy-card { padding: 32px 28px; border-right: var(--rule-thin); background: var(--paper); }
+  .strategy-card:last-child { border-right: none; }
+  .strategy-num { font-family: var(--font-display); font-size: 64px; font-weight: 900; color: var(--concrete-mid); line-height: 1; margin-bottom: 16px; }
+  .strategy-title { font-family: var(--font-display); font-size: 22px; font-weight: 700; color: var(--ink); margin-bottom: 10px; }
+  .strategy-body { font-size: 13px; color: var(--dust); line-height: 1.75; font-weight: 300; }
+
+  /* ── HOW IT WORKS ── */
+  .how-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 0; border: var(--rule-thin); margin-top: 8px; }
+  .how-card { padding: 28px 24px; border-right: var(--rule-thin); background: var(--paper); }
+  .how-card:last-child { border-right: none; }
+  .how-step { font-family: var(--font-mono); font-size: 9px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--amber); margin-bottom: 12px; }
+  .how-icon { font-size: 28px; margin-bottom: 14px; display: block; }
+  .how-title { font-family: var(--font-display); font-size: 20px; font-weight: 700; color: var(--ink); margin-bottom: 8px; }
+  .how-body { font-size: 12px; color: var(--dust); line-height: 1.7; font-weight: 300; }
+
+  /* ── NEWSLETTER / CONTRACTOR BRIEF ── */
+  .newsletter-strip {
+    background: var(--amber); padding: 48px; margin: 0;
+    display: flex; align-items: center; gap: 60px; flex-wrap: wrap;
+  }
+  .nl-left { flex: 0 0 360px; }
+  .nl-kicker { font-family: var(--font-mono); font-size: 9px; letter-spacing: 0.2em; text-transform: uppercase; color: rgba(0,0,0,0.5); margin-bottom: 10px; }
+  .nl-headline { font-family: var(--font-display); font-size: 30px; font-weight: 900; line-height: 1.1; color: var(--ink); }
+  .nl-sub { font-size: 13px; color: rgba(0,0,0,0.55); margin-top: 8px; font-weight: 300; line-height: 1.65; }
+  .nl-form { flex: 1; display: flex; flex-direction: column; gap: 12px; }
+  .nl-stats { display: flex; gap: 32px; margin-bottom: 16px; }
+  .nl-stat-num { font-family: var(--font-display); font-size: 26px; font-weight: 900; color: var(--ink); }
+  .nl-stat-label { font-size: 10px; color: rgba(0,0,0,0.45); }
+  .nl-input-row { display: flex; }
+  .nl-input {
+    flex: 1; padding: 14px 18px; border: 2px solid rgba(0,0,0,0.2);
+    background: rgba(255,255,255,0.7); font-family: var(--font-body);
+    font-size: 13px; outline: none; color: var(--ink);
+  }
+  .nl-input:focus { background: rgba(255,255,255,0.9); }
+  .nl-submit {
+    background: var(--steel); color: #fff; border: none; padding: 14px 26px;
+    font-family: var(--font-body); font-size: 11px; letter-spacing: 0.1em;
+    text-transform: uppercase; cursor: pointer; font-weight: 600; transition: background 0.15s;
+  }
+  .nl-submit:hover { background: var(--ink); }
+  .nl-consent { font-size: 10px; color: rgba(0,0,0,0.4); }
+
+  /* ── FEATURED STAYS (card grid) ── */
+  .stays-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0; border: var(--rule-thin); }
+  .stay-card { border-right: var(--rule-thin); cursor: pointer; transition: background 0.15s; }
+  .stay-card:last-child { border-right: none; }
+  .stay-card:hover { background: var(--concrete); }
+  .stay-img {
+    height: 180px; background: var(--steel-mid);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 40px; position: relative; overflow: hidden;
+  }
+  .stay-img-overlay {
+    position: absolute; inset: 0;
+    background: linear-gradient(180deg, transparent 40%, rgba(0,0,0,0.5) 100%);
+  }
+  .stay-img-badge {
+    position: absolute; top: 12px; left: 12px;
+    font-family: var(--font-mono); font-size: 8px; letter-spacing: 0.14em;
+    text-transform: uppercase; background: var(--amber); color: var(--ink);
+    padding: 4px 10px; font-weight: 700;
+  }
+  .stay-img-price {
+    position: absolute; bottom: 12px; right: 12px;
+    font-family: var(--font-display); font-size: 18px; font-weight: 900;
+    color: #fff; text-shadow: 0 1px 4px rgba(0,0,0,0.5);
+  }
+  .stay-img-price span { font-family: var(--font-mono); font-size: 10px; font-weight: 400; }
+  .stay-body { padding: 20px 22px; }
+  .stay-type { font-family: var(--font-mono); font-size: 9px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--amber-dim); margin-bottom: 6px; }
+  .stay-title { font-family: var(--font-display); font-size: 18px; font-weight: 700; color: var(--ink); margin-bottom: 4px; line-height: 1.25; }
+  .stay-loc { font-family: var(--font-mono); font-size: 10px; color: var(--dust); margin-bottom: 12px; }
+  .stay-features { display: flex; flex-wrap: wrap; gap: 6px; }
+  .stay-feat { font-family: var(--font-mono); font-size: 9px; background: var(--concrete); color: var(--steel-mid); padding: 3px 9px; letter-spacing: 0.04em; }
+
+  /* ── CTA ── */
+  .cta-section { padding: 100px 48px; background: var(--steel); text-align: center; }
+  .cta-eyebrow { font-family: var(--font-mono); font-size: 9px; letter-spacing: 0.24em; text-transform: uppercase; color: var(--amber); margin-bottom: 20px; }
+  .cta-h2 { font-family: var(--font-display); font-size: clamp(40px, 5vw, 72px); font-weight: 900; color: #fff; line-height: 1.05; margin-bottom: 14px; }
+  .cta-h2 em { font-style: italic; color: var(--amber); }
+  .cta-sub { font-size: 15px; color: rgba(255,255,255,0.4); max-width: 500px; margin: 0 auto 44px; line-height: 1.75; font-weight: 300; }
+  .cta-group { display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; }
+
+  /* ── FOOTER ── */
+  .footer { background: var(--steel); }
+  .footer-main { display: flex; gap: 0; border-bottom: 1px solid rgba(255,255,255,0.07); }
+  .footer-brand-col { flex: 0 0 300px; padding: 48px; border-right: 1px solid rgba(255,255,255,0.07); }
+  .footer-logo-text { font-family: var(--font-display); font-size: 26px; font-weight: 900; color: rgba(255,255,255,0.7); margin-bottom: 14px; display: block; }
+  .footer-logo-text span { color: var(--amber); }
+  .footer-tagline { font-size: 12px; color: rgba(255,255,255,0.3); line-height: 1.7; font-weight: 300; margin-bottom: 22px; }
+  .footer-social { display: flex; gap: 8px; }
+  .footer-social a {
+    width: 32px; height: 32px; background: rgba(255,255,255,0.07);
+    display: flex; align-items: center; justify-content: center;
+    color: rgba(255,255,255,0.4); text-decoration: none; font-size: 11px;
+    transition: all 0.15s; font-family: var(--font-mono); font-weight: 500;
+  }
+  .footer-social a:hover { background: var(--amber); color: var(--ink); }
+  .footer-cols { flex: 1; display: grid; grid-template-columns: repeat(4, 1fr); padding: 48px; gap: 0; }
+  .footer-col { padding-right: 28px; }
+  .footer-col h5 { font-family: var(--font-mono); font-size: 9px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--amber); margin-bottom: 16px; }
+  .footer-col ul { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+  .footer-col a { font-size: 12px; color: rgba(255,255,255,0.3); text-decoration: none; transition: color 0.15s; font-weight: 300; }
+  .footer-col a:hover { color: rgba(255,255,255,0.8); }
+  .footer-bottom {
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 20px 48px; flex-wrap: wrap; gap: 12px;
+    border-top: 1px solid rgba(255,255,255,0.05);
+  }
+  .footer-copy { font-family: var(--font-mono); font-size: 10px; color: rgba(255,255,255,0.2); letter-spacing: 0.06em; }
+  .footer-legal { display: flex; gap: 18px; }
+  .footer-legal a { font-family: var(--font-mono); font-size: 10px; color: rgba(255,255,255,0.2); text-decoration: none; }
+  .footer-legal a:hover { color: rgba(255,255,255,0.5); }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 1024px) {
+    .main-wrap { padding: 0 24px; }
+    .hero-inner { grid-template-columns: 1fr; }
+    .hero-sidebar { flex-direction: row; flex-wrap: wrap; border-top: 1px solid rgba(255,255,255,0.08); }
+    .hero-sidebar-item { flex: 1; min-width: 180px; border-right: 1px solid rgba(255,255,255,0.07); }
+    .sites-layout { grid-template-columns: 1fr; }
+    .projects-grid { grid-template-columns: 1fr 1fr; }
+    .tribes-grid { grid-template-columns: 1fr 1fr; }
+    .tribe-card { border-bottom: var(--rule-thin); }
+    .how-grid { grid-template-columns: 1fr 1fr; }
+    .how-card:nth-child(2) { border-right: none; }
+    .how-card:nth-child(1), .how-card:nth-child(2) { border-bottom: var(--rule-thin); }
+    .stays-grid { grid-template-columns: 1fr 1fr; }
+    .stays-grid .stay-card:nth-child(3) { grid-column: span 2; border-right: none; border-top: var(--rule-thin); }
+    .data-strip-inner { grid-template-columns: repeat(3, 1fr); }
+    .why-strip { padding: 48px 24px; flex-direction: column; gap: 28px; }
+    .why-headline { flex: 0 0 auto; }
+    .footer-main { flex-direction: column; }
+    .footer-brand-col { flex: 0 0 auto; border-right: none; border-bottom: 1px solid rgba(255,255,255,0.07); }
+    .footer-cols { grid-template-columns: 1fr 1fr; }
+    .newsletter-strip { padding: 36px 24px; flex-direction: column; gap: 28px; }
+    .nl-left { flex: 0 0 auto; }
+    .search-section { padding: 28px 24px; }
+    .search-bar { flex-direction: column; }
+    .search-field { border-right: none; border-bottom: 1px solid rgba(255,255,255,0.1); }
+    .topbar { padding: 8px 24px; }
+  }
+  @media (max-width: 768px) {
+    .nav-inner { padding: 0 16px; }
+    .nav-links, .nav-cta { display: none; }
+    .nav-hamburger { display: block; }
+    .nav-logo { padding: 16px 0; border-right: none; font-size: 20px; }
+    .hero-lead { padding: 32px 24px; }
+    .projects-grid { grid-template-columns: 1fr; }
+    .strategy-grid { grid-template-columns: 1fr; }
+    .strategy-card { border-right: none; border-bottom: var(--rule-thin); }
+    .stays-grid { grid-template-columns: 1fr; }
+    .stays-grid .stay-card:nth-child(3) { grid-column: span 1; }
+    .data-strip-inner { grid-template-columns: 1fr 1fr; }
+    .footer-cols { grid-template-columns: 1fr 1fr; padding: 28px 24px; }
+    .footer-brand-col { padding: 28px 24px; }
+    .footer-bottom { padding: 16px 24px; }
+    .topbar { display: none; }
+    .cta-section { padding: 72px 24px; }
+  }
+  @media (max-width: 520px) {
+    .tribes-grid { grid-template-columns: 1fr; }
+    .how-grid { grid-template-columns: 1fr; }
+    .how-card { border-right: none; border-bottom: var(--rule-thin); }
+    .hero-stats { flex-wrap: wrap; gap: 24px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- TICKER -->
+<div class="ticker-wrap" aria-hidden="true">
+  <div class="ticker-inner">
+    <span class="ticker-item">HS2 Phase 1 — contractors mobilising now · Birmingham</span>
+    <span class="ticker-item">Norfolk Highways 8-year programme · Kier on site from April</span>
+    <span class="ticker-item">Paddington Life Sciences Tower · Mace preferred · Q3 start</span>
+    <span class="ticker-item">Lynfield Mount Hospital rebuild starts · Bradford</span>
+    <span class="ticker-item">Thames Road 1,685 homes · Ballymore · Planning granted</span>
+    <span class="ticker-item">Northern Powerhouse Rail · £1.1bn unlocked · Leeds & Manchester</span>
+    <span class="ticker-item">Warm Homes Plan · £15bn retrofit · Nationwide contractor demand</span>
+    <span class="ticker-item">GeoPura Tilbury Hydrogen · Design stage · Essex</span>
+    <span class="ticker-item">HS2 Phase 1 — contractors mobilising now · Birmingham</span>
+    <span class="ticker-item">Norfolk Highways 8-year programme · Kier on site from April</span>
+    <span class="ticker-item">Paddington Life Sciences Tower · Mace preferred · Q3 start</span>
+    <span class="ticker-item">Lynfield Mount Hospital rebuild starts · Bradford</span>
+    <span class="ticker-item">Thames Road 1,685 homes · Ballymore · Planning granted</span>
+    <span class="ticker-item">Northern Powerhouse Rail · £1.1bn unlocked · Leeds & Manchester</span>
+    <span class="ticker-item">Warm Homes Plan · £15bn retrofit · Nationwide contractor demand</span>
+    <span class="ticker-item">GeoPura Tilbury Hydrogen · Design stage · Essex</span>
+  </div>
+</div>
+
+<!-- TOP BAR -->
+<div class="topbar">
+  <span>ACCOMMODATION FOR UK CONSTRUCTION CONTRACTORS · PARAH STAYS</span>
+  <div class="topbar-right">
+    <a href="#">List a Property</a>
+    <a href="#">Work Leads</a>
+    <a href="#">For Employers</a>
+    <a href="#">Login</a>
+  </div>
+</div>
+
+<!-- NAV -->
+<nav class="nav" id="mainNav">
+  <div class="nav-inner">
+    <a href="#" class="nav-logo">Parah <span class="logo-stays">Stays</span></a>
+    <ul class="nav-links">
+      <li><a href="#search" class="active">Find a Stay</a></li>
+      <li><a href="#sites">Active Sites</a></li>
+      <li><a href="#trades">By Trade</a></li>
+      <li><a href="#projects">Live Projects</a></li>
+      <li><a href="#how">How It Works</a></li>
+      <li><a href="#list">List Your Property</a></li>
+    </ul>
+    <div class="nav-right">
+      <a href="#search" class="nav-cta">Book a Stay</a>
+    </div>
+    <button class="nav-hamburger" aria-label="Menu" onclick="toggleMenu()">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-inner">
+    <div class="hero-lead">
+      <div class="hero-section-tag">UK's #1 Accommodation Platform for Contractors</div>
+      <h1 class="hero-h1">Your site starts<br>at <em>6am.</em><br>Your stay is<br><em>5 minutes away.</em></h1>
+      <p class="hero-excerpt">Short-term lets handpicked near active construction sites, plant depots and project zones. Built for contractors, site managers and trade workers — not tourists.</p>
+      <div class="hero-actions">
+        <a href="#search" class="btn-primary">Find a Stay Near Your Site</a>
+        <a href="#list" class="btn-ghost">List Your Property →</a>
+      </div>
+      <div class="hero-stats">
+        <div>
+          <div class="hero-stat-num">2,400+</div>
+          <div class="hero-stat-label">Properties Listed</div>
+        </div>
+        <div>
+          <div class="hero-stat-num">340</div>
+          <div class="hero-stat-label">Active Project Zones</div>
+        </div>
+        <div>
+          <div class="hero-stat-num">£38/night</div>
+          <div class="hero-stat-label">Avg. contractor rate</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="hero-sidebar">
+      <div class="hero-sidebar-item">
+        <div class="hsb-tag tag-civils">Civils · High Demand</div>
+        <div class="hsb-h3">HS2 Phase 1 — Birmingham to Curzon St</div>
+        <div class="hsb-meta">📍 Digbeth, Birmingham · 14 stays available</div>
+      </div>
+      <div class="hero-sidebar-item">
+        <div class="hsb-tag tag-housing">Housebuilding</div>
+        <div class="hsb-h3">Thames Road — 1,685-unit Newham scheme</div>
+        <div class="hsb-meta">📍 Royal Docks, London · 9 stays available</div>
+      </div>
+      <div class="hero-sidebar-item">
+        <div class="hsb-tag tag-rail">Rail · New</div>
+        <div class="hsb-h3">Norfolk Highways — Kier 8-year programme</div>
+        <div class="hsb-meta">📍 Norwich, Norfolk · 22 stays available</div>
+      </div>
+      <div class="hero-sidebar-item">
+        <div class="hsb-tag tag-energy">Energy</div>
+        <div class="hsb-h3">Tilbury Hydrogen Facility — Phase 1</div>
+        <div class="hsb-meta">📍 Thurrock, Essex · 6 stays available</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SEARCH -->
+<div class="search-section" id="search">
+  <div class="search-label">Search stays by site, postcode or project</div>
+  <div class="search-bar">
+    <div class="search-field">
+      <label for="sf-site">Project / Site / Postcode</label>
+      <input type="text" id="sf-site" placeholder="e.g. HS2 Birmingham, NW1, Kier Norfolk" />
+    </div>
+    <div class="search-field">
+      <label for="sf-trade">Trade / Role</label>
+      <select id="sf-trade">
+        <option>Any Trade</option>
+        <option>Site Manager / PM</option>
+        <option>Civil Engineer</option>
+        <option>Electrician / M&amp;E</option>
+        <option>Groundworker</option>
+        <option>Steelwork / Structural</option>
+        <option>Plumber / Pipefitter</option>
+        <option>Bricklayer / Plasterer</option>
+        <option>Plant Operator</option>
+      </select>
+    </div>
+    <div class="search-field">
+      <label for="sf-dates">Check-in → Check-out</label>
+      <input type="text" id="sf-dates" placeholder="Add dates" />
+    </div>
+    <div class="search-field">
+      <label for="sf-workers">Workers</label>
+      <select id="sf-workers">
+        <option>1 worker</option>
+        <option>2–4 workers</option>
+        <option>5–10 workers</option>
+        <option>Gang 11–30</option>
+        <option>Crew 30+</option>
+      </select>
+    </div>
+    <button class="search-submit" onclick="alert('Search functionality — connect to your booking engine here.')">Search Stays</button>
+  </div>
+</div>
+
+<!-- DATA STRIP -->
+<div class="data-strip">
+  <div class="data-strip-inner">
+    <div class="data-cell">
+      <div class="data-num">2,400+</div>
+      <div class="data-label">Properties UK-wide</div>
+      <div class="data-sub">Near active project zones</div>
+    </div>
+    <div class="data-cell">
+      <div class="data-num">340</div>
+      <div class="data-label">Live project zones</div>
+      <div class="data-sub">Updated weekly</div>
+    </div>
+    <div class="data-cell">
+      <div class="data-num">£38</div>
+      <div class="data-label">Avg. per night</div>
+      <div class="data-sub">vs £110 avg. hotel</div>
+    </div>
+    <div class="data-cell">
+      <div class="data-num">6 min</div>
+      <div class="data-label">Avg. distance to site</div>
+      <div class="data-sub">All properties verified</div>
+    </div>
+    <div class="data-cell">
+      <div class="data-num">18k+</div>
+      <div class="data-label">Contractor nights booked</div>
+      <div class="data-sub">This month</div>
+    </div>
+  </div>
+</div>
+
+<!-- FEATURED STAYS -->
+<div class="main-wrap">
+  <div class="section-header">
+    <div class="section-header-left">
+      <span class="section-name">Featured Stays</span>
+      <span class="section-tag-pill">Near high-demand sites</span>
+    </div>
+    <a href="#" class="section-all">Browse all stays →</a>
+  </div>
+
+  <div class="stays-grid">
+    <div class="stay-card">
+      <div class="stay-img" style="background: #2a3040;">
+        🏠
+        <div class="stay-img-overlay"></div>
+        <div class="stay-img-badge">Contractor Verified</div>
+        <div class="stay-img-price">£42<span>/night</span></div>
+      </div>
+      <div class="stay-body">
+        <div class="stay-type">Whole House · 4 Beds</div>
+        <div class="stay-title">Digbeth Terrace — sleeps 6 workers</div>
+        <div class="stay-loc">📍 3.2 miles from HS2 Curzon St site · Birmingham B9</div>
+        <div class="stay-features">
+          <span class="stay-feat">On-site parking</span>
+          <span class="stay-feat">Drying room</span>
+          <span class="stay-feat">Fast Wi-Fi</span>
+          <span class="stay-feat">Early start OK</span>
+        </div>
+      </div>
+    </div>
+    <div class="stay-card">
+      <div class="stay-img" style="background: #1e2a1e;">
+        🛏️
+        <div class="stay-img-overlay"></div>
+        <div class="stay-img-badge">Weekly Rate</div>
+        <div class="stay-img-price">£35<span>/night</span></div>
+      </div>
+      <div class="stay-body">
+        <div class="stay-type">3-Bed Semi · 4 Beds</div>
+        <div class="stay-title">Norwich North — near Kier highways depot</div>
+        <div class="stay-loc">📍 1.8 miles from NR3 Kier compound · Norwich</div>
+        <div class="stay-features">
+          <span class="stay-feat">Van parking x3</span>
+          <span class="stay-feat">Weekly discount</span>
+          <span class="stay-feat">Tool storage</span>
+          <span class="stay-feat">Laundry</span>
+        </div>
+      </div>
+    </div>
+    <div class="stay-card">
+      <div class="stay-img" style="background: #1a1e2a;">
+        🏢
+        <div class="stay-img-overlay"></div>
+        <div class="stay-img-badge">Group Stay</div>
+        <div class="stay-img-price">£28<span>/night</span></div>
+      </div>
+      <div class="stay-body">
+        <div class="stay-type">6-Bed HMO · All Bills Incl.</div>
+        <div class="stay-title">Royal Docks House — Newham site workers</div>
+        <div class="stay-loc">📍 0.9 miles from Thames Road site · E16</div>
+        <div class="stay-features">
+          <span class="stay-feat">Bills included</span>
+          <span class="stay-feat">DLR 4 min walk</span>
+          <span class="stay-feat">Bike storage</span>
+          <span class="stay-feat">CCTV</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- CONTRACTOR TRIBES -->
+  <div class="section-header" id="trades">
+    <div class="section-header-left">
+      <span class="section-name">Find Stays by Trade</span>
+    </div>
+    <a href="#" class="section-all">All trades →</a>
+  </div>
+
+  <div class="tribes-grid">
+    <div class="tribe-card">
+      <div class="tribe-badge">Most Booked</div>
+      <div class="tribe-icon-bg">🦺</div>
+      <div class="tribe-name">Site Managers</div>
+      <div class="tribe-role">PM · Foreman · Contracts</div>
+      <ul class="tribe-keywords">
+        <li>Dedicated desk & Wi-Fi</li>
+        <li>Quiet, professional spaces</li>
+        <li>Longer-term weekly rates</li>
+        <li>Close to site office</li>
+      </ul>
+    </div>
+    <div class="tribe-card">
+      <div class="tribe-badge">Gangs Welcome</div>
+      <div class="tribe-icon-bg">🔧</div>
+      <div class="tribe-name">Trade Workers</div>
+      <div class="tribe-role">Electricians · Plumbers · Groundworkers</div>
+      <ul class="tribe-keywords">
+        <li>Multiple van parking</li>
+        <li>Drying rooms for workwear</li>
+        <li>Tool lockup on-site</li>
+        <li>Early 5am starts OK</li>
+      </ul>
+    </div>
+    <div class="tribe-card">
+      <div class="tribe-badge">Crew Stays</div>
+      <div class="tribe-icon-bg">🏗️</div>
+      <div class="tribe-name">Plant Operators</div>
+      <div class="tribe-role">Crane · Excavator · HGV</div>
+      <ul class="tribe-keywords">
+        <li>Large vehicle access</li>
+        <li>Near depot locations</li>
+        <li>Flexible check-in/out</li>
+        <li>Rural & remote sites</li>
+      </ul>
+    </div>
+    <div class="tribe-card">
+      <div class="tribe-badge">Long Stay</div>
+      <div class="tribe-icon-bg">📐</div>
+      <div class="tribe-name">Engineers & Design</div>
+      <div class="tribe-role">Civil · Structural · M&amp;E</div>
+      <ul class="tribe-keywords">
+        <li>High-speed broadband</li>
+        <li>Quiet work-from-home setup</li>
+        <li>Monthly billing available</li>
+        <li>Near site offices & labs</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- ACTIVE SITES (venue-style) -->
+  <div class="section-header" id="sites">
+    <div class="section-header-left">
+      <span class="section-name">Stays Near Active Sites</span>
+      <span class="section-tag-pill">Updated daily</span>
+    </div>
+    <a href="#" class="section-all">All project zones →</a>
+  </div>
+
+  <div class="sites-layout">
+    <div class="site-list">
+      <div class="site-item active" onclick="selectSite(this,'hs2')">
+        <div>
+          <div class="site-item-name">HS2 Phase 1</div>
+          <div class="site-item-loc">Birmingham Curzon Street · Civils</div>
+        </div>
+        <div class="site-arrow">→</div>
+      </div>
+      <div class="site-item" onclick="selectSite(this,'norfolk')">
+        <div>
+          <div class="site-item-name">Norfolk Highways</div>
+          <div class="site-item-loc">Norwich & Norfolk · Kier Group</div>
+        </div>
+        <div class="site-arrow">→</div>
+      </div>
+      <div class="site-item" onclick="selectSite(this,'paddington')">
+        <div>
+          <div class="site-item-name">Paddington Life Sciences</div>
+          <div class="site-item-loc">W2, London · Mace Group</div>
+        </div>
+        <div class="site-arrow">→</div>
+      </div>
+      <div class="site-item" onclick="selectSite(this,'thames')">
+        <div>
+          <div class="site-item-name">Thames Road Newham</div>
+          <div class="site-item-loc">Royal Docks, London · Ballymore</div>
+        </div>
+        <div class="site-arrow">→</div>
+      </div>
+      <div class="site-item" onclick="selectSite(this,'lynfield')">
+        <div>
+          <div class="site-item-name">Lynfield Mount Hospital</div>
+          <div class="site-item-loc">Bradford, Yorkshire · Modular</div>
+        </div>
+        <div class="site-arrow">→</div>
+      </div>
+      <div class="site-item" onclick="selectSite(this,'tilbury')">
+        <div>
+          <div class="site-item-name">Tilbury Hydrogen Facility</div>
+          <div class="site-item-loc">Thurrock, Essex · GeoPura</div>
+        </div>
+        <div class="site-arrow">→</div>
+      </div>
+    </div>
+
+    <div class="site-detail">
+      <div class="site-detail-eyebrow" id="sEyebrow">Featured Project Zone · Civils</div>
+      <div class="site-detail-name" id="sName">HS2 Phase 1</div>
+      <div class="site-detail-dist" id="sDist">Stays from 8 min drive · Digbeth & Bordesley Green · On-site parking available</div>
+      <div class="site-kw">
+        <div class="site-kw-label">What workers need here</div>
+        <div class="kw-tags" id="sKeywords">
+          <span class="kw-tag">Van parking 2–4</span>
+          <span class="kw-tag">Early starts 5am</span>
+          <span class="kw-tag">Tool storage lockup</span>
+          <span class="kw-tag">Weekly rate available</span>
+        </div>
+      </div>
+      <div class="site-phases-wrap">
+        <div class="site-events-label">Active phases — high demand periods</div>
+        <div id="sPhases">
+          <span class="phase-pill">Civils mobilisation <span class="phase-pill-date">Apr–Jun 2026</span></span>
+          <span class="phase-pill">Concrete pour gangs <span class="phase-pill-date">Jul 2026</span></span>
+          <span class="phase-pill">M&amp;E installation <span class="phase-pill-date">Q4 2026</span></span>
+        </div>
+      </div>
+      <button class="site-cta" id="sCta">View Stays Near HS2 →</button>
+    </div>
+  </div>
+</div>
+
+<!-- LIVE PROJECTS GRID -->
+<div style="background: var(--steel); padding: 48px 0; margin-top: 48px;">
+  <div class="main-wrap">
+    <div class="section-header" id="projects" style="border-bottom-color: rgba(255,255,255,0.12);">
+      <div class="section-header-left">
+        <span class="section-name" style="color:#fff;">Major Live Projects</span>
+        <span class="section-tag-pill" style="background: rgba(255,255,255,0.07); color: var(--dust);">High contractor demand</span>
+      </div>
+      <a href="#" class="section-all">Full project map →</a>
+    </div>
+    <div class="projects-grid" style="margin-top: 24px;">
+      <div class="project-card">
+        <div class="project-card-month">On Site · Apr 2026</div>
+        <div class="project-card-bg-val">£56bn</div>
+        <div class="project-card-name">HS2 Phase 1 — Curzon St Station</div>
+        <div class="project-card-location">📍 Birmingham, B5 · Align JV</div>
+        <div class="project-card-tags">
+          <span class="proj-tag proj-tag-civils">Civils</span>
+          <span class="proj-tag proj-tag-rail">Rail</span>
+        </div>
+        <span class="demand-badge">⚡ High Demand</span>
+      </div>
+      <div class="project-card">
+        <div class="project-card-month">Started · Mar 2026</div>
+        <div class="project-card-bg-val">£700m</div>
+        <div class="project-card-name">Norfolk Highways Framework</div>
+        <div class="project-card-location">📍 Norwich, NR1 · Kier Group</div>
+        <div class="project-card-tags">
+          <span class="proj-tag proj-tag-civils">Roads</span>
+          <span class="proj-tag proj-tag-civils">8 Years</span>
+        </div>
+        <span class="demand-badge">22 Stays Left</span>
+      </div>
+      <div class="project-card">
+        <div class="project-card-month">Q3 Start · 2026</div>
+        <div class="project-card-bg-val">£340m</div>
+        <div class="project-card-name">Paddington Life Sciences Tower</div>
+        <div class="project-card-location">📍 W2, London · Mace Group</div>
+        <div class="project-card-tags">
+          <span class="proj-tag proj-tag-healthcare">Life Sciences</span>
+          <span class="proj-tag proj-tag-energy">Commercial</span>
+        </div>
+      </div>
+      <div class="project-card">
+        <div class="project-card-month">Planning Granted</div>
+        <div class="project-card-bg-val">£420m</div>
+        <div class="project-card-name">Thames Road — 1,685 Homes</div>
+        <div class="project-card-location">📍 Royal Docks, E16 · Ballymore</div>
+        <div class="project-card-tags">
+          <span class="proj-tag proj-tag-housing">Housebuilding</span>
+          <span class="proj-tag proj-tag-housing">Mixed Use</span>
+        </div>
+      </div>
+      <div class="project-card">
+        <div class="project-card-month">On Site · Apr 2026</div>
+        <div class="project-card-bg-val">£60m</div>
+        <div class="project-card-name">Lynfield Mount Mental Health Hospital</div>
+        <div class="project-card-location">📍 Bradford, BD9 · Modular build</div>
+        <div class="project-card-tags">
+          <span class="proj-tag proj-tag-healthcare">Healthcare</span>
+          <span class="proj-tag proj-tag-energy">Modular</span>
+        </div>
+      </div>
+      <div class="project-card">
+        <div class="project-card-month">Design Stage · 2026</div>
+        <div class="project-card-bg-val">£15bn</div>
+        <div class="project-card-name">Warm Homes Plan — Retrofit Wave 1</div>
+        <div class="project-card-location">📍 Nationwide · Multiple contractors</div>
+        <div class="project-card-tags">
+          <span class="proj-tag proj-tag-energy">Retrofit</span>
+          <span class="proj-tag proj-tag-housing">Net Zero</span>
+        </div>
+        <span class="demand-badge">Nationwide</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- WHY STRIP -->
+<div class="why-strip">
+  <div class="why-headline">"<em>7 minutes</em><br>from the site gate"</div>
+  <div class="why-items">
+    <div class="why-item"><div class="why-dot"></div><span>Site-specific pages built around project postcodes — not generic city searches</span></div>
+    <div class="why-item"><div class="why-dot"></div><span>Contractor-verified properties: van parking, drying rooms, early starts and tool storage included by default</span></div>
+    <div class="why-item"><div class="why-dot"></div><span>Weekly and monthly billing to match how contractors and employers actually pay accommodation</span></div>
+    <div class="why-item"><div class="why-dot"></div><span>Demand-surge alerts when new project phases kick off — so hosts can price correctly and workers book early</span></div>
+  </div>
+</div>
+
+<!-- HOW IT WORKS -->
+<div class="main-wrap">
+  <div class="section-header" id="how">
+    <div class="section-header-left">
+      <span class="section-name">How It Works</span>
+    </div>
+  </div>
+  <div class="how-grid">
+    <div class="how-card">
+      <div class="how-step">Step 01</div>
+      <span class="how-icon">🔍</span>
+      <div class="how-title">Search by Site</div>
+      <div class="how-body">Enter your project name, postcode or contractor company. We match stays to the actual site gate — not just the nearest town.</div>
+    </div>
+    <div class="how-card">
+      <div class="how-step">Step 02</div>
+      <span class="how-icon">🦺</span>
+      <div class="how-title">Filter by Trade</div>
+      <div class="how-body">Every listing flags contractor-specific features: van spaces, tool lockup, early-start tolerance and weekly rates. No surprise landlords.</div>
+    </div>
+    <div class="how-card">
+      <div class="how-step">Step 03</div>
+      <span class="how-icon">📋</span>
+      <div class="how-title">Book & Invoice</div>
+      <div class="how-body">Book solo or for a gang. Employers can book and invoice direct. Weekly and monthly billing cycles available for long-programme contracts.</div>
+    </div>
+    <div class="how-card">
+      <div class="how-step">Step 04</div>
+      <span class="how-icon">🔑</span>
+      <div class="how-title">Show Up & Start Work</div>
+      <div class="how-body">Digital key access, no check-in desk, no fuss. Drop your gear and rest — the site starts at 6am and so do you.</div>
+    </div>
+  </div>
+
+  <!-- SEO STRATEGY -->
+  <div class="section-header">
+    <div class="section-header-left">
+      <span class="section-name">The Strategy</span>
+    </div>
+  </div>
+  <div class="strategy-grid">
+    <div class="strategy-card">
+      <div class="strategy-num">01</div>
+      <div class="strategy-title">Project SEO</div>
+      <div class="strategy-body">Site-specific landing pages target searches contractors actually make — "accommodation near HS2 Curzon Street site" or "stays near Kier Norfolk compound." Generic platforms cannot compete with this intent precision.</div>
+    </div>
+    <div class="strategy-card">
+      <div class="strategy-num">02</div>
+      <div class="strategy-title">Phase-Based Demand</div>
+      <div class="strategy-body">Construction projects have predictable demand spikes — mobilisation, concrete pours, M&E fit-out. We monitor project phases and automatically alert hosts to adjust rates and availability ahead of each wave.</div>
+    </div>
+    <div class="strategy-card">
+      <div class="strategy-num">03</div>
+      <div class="strategy-title">Principal Contractor Deals</div>
+      <div class="strategy-body">Exclusive arrangements with tier-1 contractors — Kier, Mace, Morgan Sindall — position Parah Stays as the recommended accommodation on site induction packs. Qualified bookings at zero marketing spend.</div>
+    </div>
+  </div>
+</div>
+
+<!-- NEWSLETTER -->
+<div class="newsletter-strip" id="newsletter">
+  <div class="nl-left">
+    <div class="nl-kicker">Free · For Contractors & Employers</div>
+    <div class="nl-headline">New sites near you, every week</div>
+    <div class="nl-sub">Get notified when new stays open near your project zone — before the gang books them. Plus new project announcements and weekly rate alerts.</div>
+  </div>
+  <div class="nl-form">
+    <div class="nl-stats">
+      <div>
+        <div class="nl-stat-num">18k+</div>
+        <div class="nl-stat-label">Contractor nights/mo</div>
+      </div>
+      <div>
+        <div class="nl-stat-num">340</div>
+        <div class="nl-stat-label">Project zones</div>
+      </div>
+      <div>
+        <div class="nl-stat-num">Weekly</div>
+        <div class="nl-stat-label">New listings</div>
+      </div>
+    </div>
+    <div class="nl-input-row">
+      <input type="email" class="nl-input" placeholder="Your email — we'll send site alerts your way" />
+      <button class="nl-submit" onclick="alert('You\'re signed up for Parah Stays site alerts.')">Get Alerts</button>
+    </div>
+    <div class="nl-consent">No spam. Unsubscribe anytime. By signing up you agree to our Privacy Policy.</div>
+  </div>
+</div>
+
+<!-- CTA -->
+<section class="cta-section" id="list">
+  <div class="cta-eyebrow">List your property · Earn more</div>
+  <h2 class="cta-h2">Your spare room is<br><em>3 miles from a build.</em></h2>
+  <p class="cta-sub">Contractors need accommodation. They're reliable, they leave early and they book for weeks at a time — not one-night party rentals. Start earning tonight.</p>
+  <div class="cta-group">
+    <a href="#" class="btn-primary">List Your Property Free</a>
+    <a href="#search" class="btn-ghost">Find a Stay →</a>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="footer-main">
+    <div class="footer-brand-col">
+      <span class="footer-logo-text">Parah <span>Stays</span></span>
+      <p class="footer-tagline">Short-term accommodation for UK construction contractors, site managers and trade workers. Built around project zones, not tourist trails.</p>
+      <div class="footer-social">
+        <a href="#" title="LinkedIn">in</a>
+        <a href="#" title="X/Twitter">𝕏</a>
+        <a href="#" title="Facebook">f</a>
+      </div>
+    </div>
+    <div class="footer-cols">
+      <div class="footer-col">
+        <h5>Find Stays</h5>
+        <ul>
+          <li><a href="#">HS2 Corridor</a></li>
+          <li><a href="#">London Sites</a></li>
+          <li><a href="#">Manchester & North West</a></li>
+          <li><a href="#">Yorkshire</a></li>
+          <li><a href="#">Midlands</a></li>
+          <li><a href="#">Scotland</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h5>By Trade</h5>
+        <ul>
+          <li><a href="#">Site Managers</a></li>
+          <li><a href="#">Electricians & M&E</a></li>
+          <li><a href="#">Groundworkers</a></li>
+          <li><a href="#">Plant Operators</a></li>
+          <li><a href="#">Civil Engineers</a></li>
+          <li><a href="#">Bricklayers & Plasterers</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h5>For Hosts</h5>
+        <ul>
+          <li><a href="#">List Your Property</a></li>
+          <li><a href="#">Contractor Hosting Guide</a></li>
+          <li><a href="#">Pricing & Rates</a></li>
+          <li><a href="#">Project Zone Alerts</a></li>
+          <li><a href="#">Host Support</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h5>Company</h5>
+        <ul>
+          <li><a href="#">About Parah Stays</a></li>
+          <li><a href="#">For Employers</a></li>
+          <li><a href="#">Principal Contractor Deals</a></li>
+          <li><a href="#">Privacy Policy</a></li>
+          <li><a href="#">Terms & Conditions</a></li>
+          <li><a href="#">Contact Us</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <div class="footer-copy">© 2026 Parah Stays Ltd. All rights reserved. Registered in England & Wales.</div>
+    <div class="footer-legal">
+      <a href="#">Privacy</a>
+      <a href="#">Cookies</a>
+      <a href="#">Terms</a>
+      <a href="#">Sitemap</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+  const siteData = {
+    hs2: {
+      eyebrow: 'Major Programme · Civils · Birmingham',
+      name: 'HS2 Phase 1',
+      dist: 'Stays from 8 min drive · Digbeth & Bordesley Green · Van parking · Weekly rates',
+      keywords: ['Van parking 2–4', 'Early starts 5am', 'Tool storage lockup', 'Weekly rate available'],
+      phases: [['Civils mobilisation', 'Apr–Jun 2026'], ['Concrete pour gangs', 'Jul 2026'], ['M&E installation', 'Q4 2026']]
+    },
+    norfolk: {
+      eyebrow: 'Highways Framework · 8 Years · Kier',
+      name: 'Norfolk Highways',
+      dist: 'Stays across Norwich, King\'s Lynn & Great Yarmouth · Multiple depots · Rural access',
+      keywords: ['Large vehicle access', 'Rural locations', 'Monthly billing', 'Flexible check-in'],
+      phases: [['Programme launch', 'Apr 2026'], ['Phase 1 resurfacing', 'May–Sep 2026'], ['Winter maintenance ops', 'Nov 2026']]
+    },
+    paddington: {
+      eyebrow: 'Commercial · Life Sciences · London W2',
+      name: 'Paddington Life Sciences',
+      dist: 'Stays in Bayswater, Maida Vale & Kensal Rise · Tube 3 stops · Zone 1–2',
+      keywords: ['Zone 1 access', 'Professional interiors', 'Long-stay discounts', 'Near site office'],
+      phases: [['Groundworks start', 'Q3 2026'], ['Structural frame', 'Q4 2026'], ['M&E fit-out', '2027']]
+    },
+    thames: {
+      eyebrow: 'Housebuilding · 1,685 Units · Ballymore',
+      name: 'Thames Road Newham',
+      dist: 'Stays in Canning Town, Plaistow & Stratford · DLR direct · E16 corridor',
+      keywords: ['DLR 4 min walk', 'Bills included options', 'Group house available', 'CCTV & secure'],
+      phases: [['Pre-construction', 'Mid 2026'], ['Phase 1 groundworks', 'Late 2026'], ['Superstructure', '2027']]
+    },
+    lynfield: {
+      eyebrow: 'Healthcare · Modular Build · Bradford',
+      name: 'Lynfield Mount Hospital',
+      dist: 'Stays in Bradford BD9 & Shipley · 10 min drive to site · Free parking',
+      keywords: ['Free parking', 'Quiet residential streets', 'Weekly rates', 'Early starts accepted'],
+      phases: [['Modular install', 'Apr–Aug 2026'], ['Internal fit-out', 'Sep–Dec 2026'], ['Commissioning', 'Q1 2027']]
+    },
+    tilbury: {
+      eyebrow: 'Energy · Green Hydrogen · Thurrock',
+      name: 'Tilbury Hydrogen Facility',
+      dist: 'Stays in Grays, Stanford-le-Hope & Gravesend · M25 J30 2 min · Riverside',
+      keywords: ['M25 access', 'HGV-friendly streets', 'Short-term available', 'Near Port of Tilbury'],
+      phases: [['Design & pre-con', 'Q2 2026'], ['Civil groundworks', 'Q3 2026'], ['Plant installation', 'Q4 2026']]
+    }
+  };
+
+  function selectSite(el, key) {
+    document.querySelectorAll('.site-item').forEach(function(i) { i.classList.remove('active'); });
+    el.classList.add('active');
+    var d = siteData[key];
+    document.getElementById('sEyebrow').textContent = d.eyebrow;
+    document.getElementById('sName').textContent = d.name;
+    document.getElementById('sDist').textContent = d.dist;
+    var kwEl = document.getElementById('sKeywords');
+    kwEl.innerHTML = d.keywords.map(function(k) { return '<span class="kw-tag">' + k + '</span>'; }).join('');
+    var phEl = document.getElementById('sPhases');
+    phEl.innerHTML = d.phases.map(function(p) {
+      return '<span class="phase-pill">' + p[0] + ' <span class="phase-pill-date">' + p[1] + '</span></span>';
+    }).join('');
+    document.getElementById('sCta').textContent = 'View Stays Near ' + d.name.split(' ').slice(0,2).join(' ') + ' →';
+  }
+
+  function toggleMenu() {
+    document.getElementById('mainNav').classList.toggle('mobile-open');
+  }
+
+  // Pause ticker on hover
+  var ticker = document.querySelector('.ticker-inner');
+  ticker.addEventListener('mouseenter', function() { this.style.animationPlayState = 'paused'; });
+  ticker.addEventListener('mouseleave', function() { this.style.animationPlayState = 'running'; });
+</script>
+</body>
+</html>
